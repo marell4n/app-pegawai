@@ -23,7 +23,6 @@
                 <li><a href="{{ url('/department') }}" class="{{ request()->is('department*') ? 'active' : '' }}">Department</a></li>
                 <li><a href="{{ url('/attendance') }}" class="{{ request()->is('attendance*') ? 'active' : '' }}">Attendance</a></li>
                 <li><a href="{{ url('/report') }}" class="{{ request()->is('report*') ? 'active' : '' }}">Report</a></li>
-                <li><a href="{{ url('/settings') }}" class="{{ request()->is('settings*') ? 'active' : '' }}">Settings</a></li>
             </ul>
         </nav>
     </header>
