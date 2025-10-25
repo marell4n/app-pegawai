@@ -1,6 +1,8 @@
 @extends('master')
 @section('title', 'Edit Status Absensi Alpha')
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/styleform.css') }}">
+
 <h1>Edit Status Absensi Alpha (A)</h1>
 
 @if ($errors->any())

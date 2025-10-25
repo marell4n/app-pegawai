@@ -1,6 +1,8 @@
 @extends('master')
 @section('title', 'Edit Posisi')
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/styleform.css') }}">
+
 <h1>Form Edit Posisi</h1>
 
 {{-- Tampilkan error validasi jika ada --}}

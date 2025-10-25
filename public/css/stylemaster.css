@@ -64,7 +64,6 @@ nav ul li a {
     position: relative;
 }
 
-/*
 nav ul li a::after {
     content: '';
     position: absolute;
@@ -76,27 +75,22 @@ nav ul li a::after {
     background: white;
     transition: width 0.3s ease;
 }
-*/
 
 nav ul li a:hover {
     background: rgba(255, 255, 255, 0.2);
 }
 
-/*
 nav ul li a:hover::after {
     width: 60%;
 }
-*/
 
 nav ul li a.active {
     background: rgba(255, 255, 255, 0.25);
 }
 
-/*
 nav ul li a.active::after {
     width: 60%;
 }
-*/
 
 /* Hamburger Menu Button */
 .menu-toggle {

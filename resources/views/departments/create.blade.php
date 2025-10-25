@@ -1,6 +1,8 @@
 @extends('master')
 @section('title', 'Tambah Departemen Baru')
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/styleform.css') }}">
+
 <h1>Form Tambah Departemen</h1>
 
 {{-- Tampilkan error validasi jika ada --}}

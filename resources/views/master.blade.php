@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>App Pegawai</title>
-    <!-- <link rel="stylesheet" href="{{ asset('css/stylemaster.css') }}"> -->
+    <link rel="stylesheet" href="{{ asset('css/stylemaster.css') }}">
 </head>
 <body>
     <!-- Navbar di atas -->
