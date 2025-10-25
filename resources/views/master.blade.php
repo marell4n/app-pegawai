@@ -19,7 +19,7 @@
         </div>
         <nav id="navbar">
             <ul>
-                <li><a href="{{ url('/employee') }}" class="{{ request()->is('employee*') ? 'active' : '' }}">Employee</a></li>
+                <li><a href="{{ route('employees.index') }}" class="{{ request()->is('employees*') ? 'active' : '' }}">Employees</a></li>
                 <li><a href="{{ route('departments.index') }}" class="{{ request()->is('departments*') ? 'active' : '' }}">Departments</a></li>
                 <li><a href="{{ route('positions.index') }}" class="{{ request()->is('positions*') ? 'active' : '' }}">Positions</a></li>
                 <li><a href="{{ url('/attendance') }}" class="{{ request()->is('attendance*') ? 'active' : '' }}">Attendance</a></li>
