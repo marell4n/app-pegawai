@@ -19,11 +19,15 @@ class AttendanceSeeder extends Seeder
         $employeeIds = Employee::pluck('id');
 
         $attendances = [];
-        $statuses = ['hadir', 'izin', 'sakit', 'alpha'];
+        // Status baru: H=Hadir, HT=Hadir Terlambat, I=Izin, S=Sakit, A=Alpha
+        $statuses = ['H', 'HT', 'I', 'S', 'A'];
         $today = Carbon::today();
+        
+        $jamMasukHadir = Carbon::parse('08:15:00'); // Contoh Hadir (antara 7-9)
+        $jamMasukTelat = Carbon::parse('09:30:00'); // Contoh Telat (> 9)
 
         foreach ($employeeIds as $employeeId) {
-            // Buat data absensi dummy untuk 5 hari terakhir untuk setiap karyawan
+            // Buat data absensi dummy untuk 5 hari terakhir
             for ($i = 0; $i < 5; $i++) {
                 $date = $today->copy()->subDays($i);
                 $status = $statuses[array_rand($statuses)]; // Pilih status acak
@@ -31,13 +35,16 @@ class AttendanceSeeder extends Seeder
                 $waktuMasuk = null;
                 $waktuKeluar = null;
 
-                if ($status == 'hadir') {
-                    // Buat waktu masuk dan keluar acak jika hadir
-                    $masukHour = rand(7, 9); // Masuk antara jam 7-9
-                    $keluarHour = rand(16, 18); // Keluar antara jam 16-18
-                    $waktuMasuk = $date->copy()->setHour($masukHour)->setMinute(rand(0, 59))->setSecond(rand(0, 59))->format('H:i:s');
-                    $waktuKeluar = $date->copy()->setHour($keluarHour)->setMinute(rand(0, 59))->setSecond(rand(0, 59))->format('H:i:s');
+                if ($status == 'H') {
+                    // Jika status Hadir
+                    $waktuMasuk = $jamMasukHadir->format('H:i:s');
+                    $waktuKeluar = '16:00:00';
+                } elseif ($status == 'HT') {
+                     // Jika status Hadir Terlambat
+                    $waktuMasuk = $jamMasukTelat->format('H:i:s');
+                    $waktuKeluar = '16:00:00';
                 }
+                // Jika status I, S, atau A, $waktuMasuk dan $waktuKeluar tetap null
 
                 $attendances[] = [
                     'karyawan_id' => $employeeId,
@@ -50,8 +57,11 @@ class AttendanceSeeder extends Seeder
                 ];
             }
         }
+        
+        // Hapus data lama sebelum insert
+        DB::table('attendance')->truncate();
 
-        // Masukkan semua data absensi ke database
+        // Masukkan semua data absensi baru ke database
         DB::table('attendance')->insert($attendances);
     }
 }

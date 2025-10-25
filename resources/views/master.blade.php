@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>App Pegawai</title>
-    <link rel="stylesheet" href="{{ asset('css/stylemaster.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('css/stylemaster.css') }}"> -->
 </head>
 <body>
     <!-- Navbar di atas -->
@@ -22,8 +22,7 @@
                 <li><a href="{{ route('employees.index') }}" class="{{ request()->is('employees*') ? 'active' : '' }}">Employees</a></li>
                 <li><a href="{{ route('departments.index') }}" class="{{ request()->is('departments*') ? 'active' : '' }}">Departments</a></li>
                 <li><a href="{{ route('positions.index') }}" class="{{ request()->is('positions*') ? 'active' : '' }}">Positions</a></li>
-                <li><a href="{{ url('/attendance') }}" class="{{ request()->is('attendance*') ? 'active' : '' }}">Attendance</a></li>
-                <li><a href="{{ url('/report') }}" class="{{ request()->is('report*') ? 'active' : '' }}">Report</a></li>
+                <li><a href="{{ route('attendances.index') }}" class="{{ request()->is('attendance*') ? 'active' : '' }}">Attendance</a></li>                
             </ul>
         </nav>
     </header>

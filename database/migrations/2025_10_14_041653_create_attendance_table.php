@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->time('waktu_masuk')->nullable();
             $table->time('waktu_keluar')->nullable();
-            $table->enum('status_absensi', ['hadir', 'izin', 'sakit', 'alpha']);
+            $table->enum('status_absensi', ['H', 'HT', 'I', 'S', 'A']);
             $table->timestamps();
 
             // Foreign key constraint
