@@ -6,7 +6,6 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Employee; // Import Employee
-use App\Models\Position; // Import Position
 use Carbon\Carbon;
 
 class SalarySeeder extends Seeder
@@ -21,13 +20,16 @@ class SalarySeeder extends Seeder
         $salaries = [];
         $bulanIni = Carbon::now()->format('Y-m'); // Format: '2025-10'
 
+$tunjanganPersen = 0.10; // 10%
+        $potonganPersen = 0.04;  // 4%
+
         foreach ($employees as $employee) {
             // Pastikan relasi position ada dan gaji_pokok ada
-            $gajiPokok = $employee->position->gaji_pokok ?? 0; // Ambil gaji dari relasi, default 0 jika tidak ada
+            $gajiPokok = $employee->position->gaji_pokok ?? 0; // Ambil gaji dari relasi
 
-            // Tunjangan dan potongan dummy (bisa Anda kustomisasi)
-            $tunjangan = $gajiPokok * (rand(5, 15) / 100); // Tunjangan 5-15% dari gaji pokok
-            $potongan = $gajiPokok * (rand(1, 5) / 100);   // Potongan 1-5% dari gaji pokok
+            // Hitung Tunjangan dan Potongan berdasarkan persentase tetap
+            $tunjangan = $gajiPokok * $tunjanganPersen;
+            $potongan = $gajiPokok * $potonganPersen;
 
             $totalGaji = $gajiPokok + $tunjangan - $potongan;
 
@@ -43,7 +45,10 @@ class SalarySeeder extends Seeder
             ];
         }
 
-        // Masukkan semua data gaji ke database
+        // Hapus data gaji lama
+        DB::table('salaries')->truncate(); 
+        
+        // Masukkan semua data gaji baru ke database
         DB::table('salaries')->insert($salaries);
     }
 }

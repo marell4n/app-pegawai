@@ -70,7 +70,6 @@ class EmployeeSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
-            // Tambahkan data pegawai lainnya di sini sesuai format array di atas
         ]);
     }
 }

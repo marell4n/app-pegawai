@@ -19,10 +19,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             DepartmentSeeder::class, // Harus dijalankan dulu
-            PositionSeeder::class,   // Harus dijalankan dulu
-            EmployeeSeeder::class,   // Data employee manual dibuat di sini
-            AttendanceSeeder::class, // Sekarang bisa menggunakan data employee
-            SalarySeeder::class,     // Sekarang bisa menggunakan data employee & position
+            PositionSeeder::class, // Harus dijalankan dulu
+            EmployeeSeeder::class,
+            AttendanceSeeder::class,
+            SalarySeeder::class,
         ]);
     }
 }
