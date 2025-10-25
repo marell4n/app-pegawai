@@ -20,9 +20,9 @@ class Employee extends Model
         'status',
     ];
 
-    public function departments(): BelongsTo
+    public function department(): BelongsTo
     {
-        return $this->belongsTo(Department::class, 'department_employee', 'employee_id', 'department_id');
+        return $this->belongsTo(Department::class,  'department_id');
     }
 
     public function position(): BelongsTo
