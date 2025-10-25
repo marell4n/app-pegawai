@@ -46,6 +46,40 @@
                 <td>{{ $employee->status }}</td>
             </tr>
         </table>
+        <h3 style="margin-top: 20px;">Informasi Gaji Terbaru</h3>
+
+            {{-- Ambil data gaji terbaru dari relasi yang di-load --}}
+            @php
+                $latestSalary = $employee->salaries->first();
+            @endphp
+
+            @if($latestSalary)
+                <table>
+                    <tr>
+                        <th>Bulan Gaji</th>
+                        {{-- Format 'YYYY-MM' menjadi 'Nama Bulan Tahun' --}}
+                        <td>{{ \Carbon\Carbon::parse($latestSalary->bulan . '-01')->format('F Y') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Gaji Pokok</th>
+                        <td>Rp {{ number_format($latestSalary->gaji_pokok, 0, ',', '.') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Tunjangan (10%)</th>
+                        <td>Rp {{ number_format($latestSalary->tunjangan, 0, ',', '.') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Potongan (4%)</th>
+                        <td>Rp {{ number_format($latestSalary->potongan, 0, ',', '.') }}</td>
+                    </tr>
+                    <tr style="font-weight: bold; background-color: #f5f5f5;">
+                        <th>Total Gaji Diterima</th>
+                        <td>Rp {{ number_format($latestSalary->total_gaji, 0, ',', '.') }}</td>
+                    </tr>
+                </table>
+            @else
+                <p style="text-align: left; color: #777; margin-left: 10px;">Data gaji untuk pegawai ini belum dibuat.</p>
+            @endif
     </div>
 
     <!-- Button container di luar table-detail -->

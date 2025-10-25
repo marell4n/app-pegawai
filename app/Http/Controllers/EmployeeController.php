@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\Department;
 use App\Models\Position;
+use App\Models\Salary;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class EmployeeController extends Controller
 {
@@ -27,7 +29,7 @@ class EmployeeController extends Controller
         $departments = Department::orderBy('nama_department')->get();
         $positions = Position::orderBy('nama_jabatan')->get();
 
-        return view('employee.create', compact('departments', 'positions'));
+        return view('employees.create', compact('departments', 'positions'));
     }
 
     /**
@@ -54,7 +56,29 @@ class EmployeeController extends Controller
             ],
             'status' => 'required|string|max:50',
         ]);
-        Employee::create($request->all());
+       $newEmployee = Employee::create($request->all());
+
+       // Logika Pembuatan Gaji Otomatis
+       $position = Position::find($newEmployee->jabatan_id);
+       $gajiPokok = $position->gaji_pokok ?? 0;
+
+       $tunjanganPersen = 0.10; // 10%
+       $potonganPersen = 0.04;  // 4%
+
+       $tunjangan = $gajiPokok * $tunjanganPersen;
+       $potongan = $gajiPokok * $potonganPersen;
+       $totalGaji = $gajiPokok + $tunjangan - $potongan;
+
+       Salary::create([
+            'karyawan_id' => $newEmployee->id,
+            'bulan' => Carbon::now()->format('Y-m'), // Format: 2025-10
+            'gaji_pokok' => $gajiPokok,
+            'tunjangan' => $tunjangan,
+            'potongan' => $potongan,
+            'total_gaji' => $totalGaji,
+        ]);
+        // ----
+
         return redirect()->route('employees.index')
                          ->with('success', 'Pegawai berhasil ditambahkan.');
     }
@@ -64,8 +88,14 @@ class EmployeeController extends Controller
      */
     public function show(string $id)
     {
-        $employee = Employee::with(['department', 'position'])->findOrFail($id);
-        return view('employee.show', compact('employee'));
+        $employee = Employee::with(['department',
+                                               'position',
+                                               'salaries' => function ($query) {
+                                                    // Mengambil data gaji terbaru berdasarkan 'bulan'
+                                                    $query->orderBy('bulan', 'desc')->take(1);
+                                                }
+        ])->findOrFail($id);
+        return view('employees.show', compact('employee'));
     }
 
     /**
@@ -78,7 +108,7 @@ class EmployeeController extends Controller
         $positions = Position::orderBy('nama_jabatan')->get();
         
         $employee = Employee::find($id);
-        return view('employee.edit', compact('employee', 'departments', 'positions'));
+        return view('employees.edit', compact('employee', 'departments', 'positions'));
     }
 
     /**
@@ -87,6 +117,7 @@ class EmployeeController extends Controller
     public function update(Request $request, string $id)
     {
         $employee = Employee::findOrFail($id);
+        $oldJabatanId = $employee->jabatan_id;
 
         $request->validate([
             'nama_lengkap' => 'required|string|max:255',
@@ -95,19 +126,45 @@ class EmployeeController extends Controller
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string|max:255',
             'tanggal_masuk' => 'required|date',
-             'department_id' => [
-                'required',
-                'integer',
-                Rule::exists('departments', 'id')
-            ],
-            'jabatan_id' => [
-                'required',
-                'integer',
-                Rule::exists('positions', 'id')
-            ],
+            'department_id' => [ 'required', 'integer', Rule::exists('departments', 'id') ],
+            'jabatan_id' => [ 'required', 'integer', Rule::exists('positions', 'id') ],
             'status' => 'required|string|max:50',
         ]);
+
+        $newJabatanId = $request->input('jabatan_id');
+        
         $employee->update($request->all());
+
+        // Logika Update Gaji Jika Jabatan Berubah
+        if ($oldJabatanId != $newJabatanId) {
+            $position = Position::find($newJabatanId);
+            $gajiPokok = $position->gaji_pokok ?? 0;
+
+            $tunjanganPersen = 0.10; // 10%
+            $potonganPersen = 0.04;  // 4%
+
+            $tunjangan = $gajiPokok * $tunjanganPersen;
+            $potongan = $gajiPokok * $potonganPersen;
+            $totalGaji = $gajiPokok + $tunjangan - $potongan;
+
+            Salary::updateOrCreate(
+                [
+                    'karyawan_id' => $employee->id,
+                    'bulan'       => Carbon::now()->format('Y-m') // Mencari berdasarkan bulan ini
+                ],
+                [
+                    'gaji_pokok'  => $gajiPokok, // Data yang di-update atau di-create
+                    'tunjangan'   => $tunjangan,
+                    'potongan'    => $potongan,
+                    'total_gaji'  => $totalGaji,
+                ]
+            );
+
+            return redirect()->route('employees.index')
+                             ->with('success', 'Data pegawai berhasil diperbarui dan gaji telah disesuaikan.');
+        }
+        // -----
+
         return redirect()->route('employees.index')
                          ->with('success', 'Data pegawai berhasil diperbarui.');
     }
@@ -120,6 +177,8 @@ class EmployeeController extends Controller
         $employee = Employee::findOrFail($id);
         
         try {
+            $employee->salaries()->delete();
+            $employee->attendance()->delete();
             $employee->delete();
             return redirect()->route('employees.index')
                          ->with('success', 'Data pegawai berhasil dihapus.'); // Tambahkan pesan sukses
