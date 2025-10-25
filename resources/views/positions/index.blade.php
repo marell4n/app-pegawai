@@ -3,13 +3,6 @@
 @section('content')
 <h1>Daftar Posisi / Jabatan</h1>
 
-{{-- Tombol Tambah --}}
-<div class="button-container" style="margin-bottom: 20px;">
-    <div class="add-button">
-        <a href="{{ route('positions.create') }}" class="btn-add">Tambah Posisi</a>
-    </div>
-</div>
-
 {{-- Pesan Sukses/Error --}}
 @if (session('success'))
     <div style="color: green; margin-bottom: 15px; text-align: center;">{{ session('success') }}</div>
@@ -55,8 +48,10 @@
     </table>
 </div>
 
-{{-- Pagination Links --}}
-<div style="margin-top: 20px;">
-    {{ $positions->links() }}
+{{-- Tombol Tambah --}}
+<div class="button-container" style="margin-bottom: 20px;">
+    <div class="add-button">
+        <a href="{{ route('positions.create') }}" class="btn-add">Tambah Posisi</a>
+    </div>
 </div>
 @endsection
