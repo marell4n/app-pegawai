@@ -34,6 +34,14 @@
                 <td>{{ $employee->tanggal_masuk }}</td>
             </tr>
             <tr>
+                <th>Departemen</th>
+                <td>{{ $employee->department ? $employee->department->nama_department : 'Tidak ada departemen' }}</td>
+            </tr>
+            <tr>
+                <th>Jabatan</th>
+                <td>{{ $employee->position ? $employee->position->nama_jabatan : 'Tidak ada posisi' }}</td>
+            </tr>
+            <tr>
                 <th>Status</th>
                 <td>{{ $employee->status }}</td>
             </tr>

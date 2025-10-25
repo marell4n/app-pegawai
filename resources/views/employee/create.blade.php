@@ -6,6 +6,18 @@
 </head>
 <body>
     <h1 class="mb-4">Form Pegawai</h1>
+
+    @if ($errors->any())
+    <div style="color: red; margin-bottom: 15px;">
+        <strong>Whoops!</strong> Terjadi kesalahan input.<br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
     <form action="{{ route('employees.store') }}" method="POST">
         @csrf
         <table>
@@ -32,6 +44,32 @@
             <tr>
                 <td><label for="tanggal_masuk">Tanggal Masuk:</label></td>
                 <td><input type="date" id="tanggal_masuk" name="tanggal_masuk"></td>
+            </tr>
+            <tr>
+                <td><label for="department_id">Departemen:</label></td>
+                <td>
+                    <select id="department_id" name="department_id" required>
+                        <option value="">-- Pilih Departemen --</option>
+                        @foreach($departments as $department)
+                            <option value="{{ $department->id }}" {{ old('department_id') == $department->id ? 'selected' : '' }}>
+                                {{ $department->nama_department }}
+                            </option>
+                        @endforeach
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="jabatan_id">Posisi/Jabatan:</label></td>
+                <td>
+                    <select id="jabatan_id" name="jabatan_id" required>
+                        <option value="">-- Pilih Posisi --</option>
+                        @foreach($positions as $position)
+                            <option value="{{ $position->id }}" {{ old('jabatan_id') == $position->id ? 'selected' : '' }}>
+                                {{ $position->nama_jabatan }}
+                            </option>
+                        @endforeach
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td><label for="status">Status:</label></td>
