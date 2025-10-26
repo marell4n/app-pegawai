@@ -28,7 +28,7 @@
         * Jika **status** dipilih **I (Izin)** atau **S (Sakit)**, jam masuk/keluar dikosongkan.
         * Jika **tidak mengisi jam masuk maupun status I/S**, status otomatis menjadi **A (Alpha)**.
     * Menampilkan daftar absensi yang dikelompokkan per tanggal.
-    * **Edit Terbatas**: Hanya absensi dengan status **A (Alpha)** yang bisa diubah menjadi **I (Izin)** atau **S (Sakit)**.
+    * Hanya absensi dengan status **A (Alpha)** dan **HT (Hadir Terlambat)** yang bisa diubah.
     * Menghapus data absensi.
 
 ### Struktur & Tampilan

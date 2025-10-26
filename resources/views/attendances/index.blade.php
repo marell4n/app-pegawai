@@ -69,7 +69,7 @@
         
         <td>
             <div class="action-buttons">
-                {{-- Tombol Edit hanya muncul jika status 'A' --}}
+                {{-- Tombol Edit hanya muncul jika status 'A' dan 'HT' --}}
                 @if (in_array($attendance->status_absensi, ['A', 'HT']))
                     <a href="{{ route('attendances.edit', $attendance->id) }}" class="btn btn-edit">Edit</a>
                 @else
