@@ -50,7 +50,7 @@
             <td><label for="waktu_masuk">1. Waktu Masuk (H/HT):</label></td>
             <td>
                 <input type="time" id="waktu_masuk" name="waktu_masuk" value="{{ old('waktu_masuk') }}">
-                <small style="display: block; color: #777;">Isi jam masuk (misal: 08:30) untuk status Hadir (H) atau Hadir Terlambat (HT).</small>
+                <small>Isi jam masuk (misal: 08:30) untuk status Hadir (H) atau Hadir Terlambat (HT).</small>
             </td>
         </tr>
 
@@ -63,7 +63,7 @@
                     <option value="I" {{ old('status_absensi') == 'I' ? 'selected' : '' }}>Izin (I)</option>
                     <option value="S" {{ old('status_absensi') == 'S' ? 'selected' : '' }}>Sakit (S)</option>
                 </select>
-                <small style="display: block; color: #777;">Pilih jika karyawan Izin atau Sakit.</small>
+                <small>Pilih jika karyawan Izin atau Sakit.</small>
             </td>
         </tr>
 
@@ -76,8 +76,8 @@
 
         <tr>
             <td colspan="2" style="text-align:right; padding-top: 20px;">
+                <a href="{{ route('attendances.index') }}" class="btn btn-back">Kembali</a>
                 <button type="submit">Simpan</button>
-                <a href="{{ route('attendances.index') }}" class="btn btn-back" style="margin-left: 10px; text-decoration: none; display: inline-block; background: #EA9CAF; color: white; padding: 15px 30px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(213, 105, 137, 0.4); text-transform: uppercase; letter-spacing: 1px;">Kembali</a>
             </td>
         </tr>
     </table>

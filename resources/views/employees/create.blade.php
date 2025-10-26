@@ -83,8 +83,8 @@
         </tr>
         <tr>
             <td colspan="2" style="text-align:right;">
+                <a href="{{ route('employees.index') }}" class="btn btn-back">Kembali</a>
                 <button type="submit">Simpan</button>
-                <a href="{{ route('employees.index') }}" class="btn btn-back" style="margin-left: 10px; text-decoration: none; display: inline-block; background: #EA9CAF; color: white; padding: 15px 30px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(213, 105, 137, 0.4); text-transform: uppercase; letter-spacing: 1px;">Kembali</a>
             </td>
         </tr>
     </table>

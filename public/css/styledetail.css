@@ -20,7 +20,7 @@ body {
 }
 
 h1 {
-    color: #D56989;
+    color: #F790B2;
     text-align: center;
     font-size: 2.5em;
     font-family: "Noto Sans", sans-serif;
@@ -29,7 +29,7 @@ h1 {
 }
 
 .table-detail {
-    background: #C2DC80;
+    background: #733D26;
     max-width: 600px;
     margin: 0 auto;
     border-radius: 15px;
@@ -58,8 +58,8 @@ th, td {
 
 th {
     background: rgba(213, 105, 137, 0.1);
-    color: #D56989;
-    font-weight: 700;
+    color: whitesmoke;
+    font-weight: 400;
     font-size: 14px;
     width: 40%;
     font-family: "Noto Sans", sans-serif;
@@ -75,7 +75,7 @@ td {
 
 tr:hover th {
     background: rgba(213, 105, 137, 0.2);
-    color: #D56989;
+    color: #F790B2;
     transition: all 0.3s ease;
 }
 
@@ -137,13 +137,20 @@ tr:hover td {
     box-shadow: 0 4px 15px rgba(213, 105, 137, 0.4);
 }
 
+.btn-back {
+    background: #EA9CAF;
+    color: black;
+}
+
 .btn-edit {
-    background: #D56989;
+    background: #AF7F73;
+    box-shadow: 0 2px 8px rgba(234, 156, 175, 0.3);
     color: white;
 }
 
-.btn-back {
-    background: #EA9CAF;
+.btn-delete {
+    background: #733D26;
+    box-shadow: 0 2px 8px rgba(194, 97, 108, 0.3);
     color: white;
 }
 

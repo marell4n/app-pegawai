@@ -25,7 +25,7 @@
         @php
             $currentDate = $attendance->tanggal;
             // Format tanggal (misal: Sabtu, 25 Oktober 2025)
-            $formattedDate = \Carbon\Carbon::parse($currentDate)->isoFormat('dddd, D MMMM YYYY');
+            $formattedDate = \Carbon\Carbon::parse($currentDate)->locale('id')->isoFormat('dddd, D MMMM YYYY');
         @endphp
 
         {{-- Tutup tabel sebelumnya (jika bukan iterasi pertama) --}}
@@ -70,8 +70,8 @@
         <td>
             <div class="action-buttons">
                 {{-- Tombol Edit hanya muncul jika status 'A' --}}
-                @if ($attendance->status_absensi == 'A')
-                    <a href="{{ route('attendances.edit', $attendance->id) }}" class="btn btn-edit">Edit (A)</a>
+                @if (in_array($attendance->status_absensi, ['A', 'HT']))
+                    <a href="{{ route('attendances.edit', $attendance->id) }}" class="btn btn-edit">Edit</a>
                 @else
                     {{-- Beri placeholder agar rapi --}}
                     <span style="color: #999; font-size: 12px; padding: 5px 10px;">(Fixed)</span>
@@ -101,7 +101,7 @@
 
 
 {{-- Keterangan Status Absensi (Tanpa Warna) --}}
-<div class="keterangan" style="margin-top: 30px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9;">
+<div class="keterangan" style="margin-top: 30px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: tranparant; font-size: small">
     <h3>Keterangan Status Absensi</h3>
     <ul style="list-style-type: none; padding-left: 0;">
         <li><strong>H</strong> : Hadir (Masuk antara jam 07:00 - 09:00)</li>
@@ -110,7 +110,7 @@
         <li><strong>S</strong> : Sakit</li>
         <li><strong>A</strong> : Alpha / Tidak Hadir (Tanpa Keterangan)</li>
     </ul>
-    <p><strong>Catatan:</strong> Jam Keluar otomatis diisi pukul 16:00 jika status H atau HT. Hanya status Alpha (A) yang dapat diubah menjadi Izin (I) atau Sakit (S).</p>
+    <p><strong>Catatan:</strong> Jam Keluar otomatis diisi pukul 16:00. Hanya status Alpha (A) atau Hadir Terlambat (HT) yang dapat diubah menjadi Izin (I) atau Sakit (S).</p>
 </div>
 
 {{-- Tombol Tambah --}}

@@ -39,16 +39,20 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'karyawan_id' => 'required|integer|exists:employees,id',
+        $validated = $request->validate([
+            'karyawan_id' => [
+                'required',
+                'integer',
+                'exists:employees,id',
+                // Pastikan tidak ada absensi duplikat untuk karyawan di tanggal yg sama
+                Rule::unique('attendance')->where(function ($query) use ($request) {
+                    return $query->where('karyawan_id', $request->karyawan_id)
+                                 ->where('tanggal', $request->tanggal);
+                }),
+            ],
             'tanggal' => 'required|date',
-            'waktu_masuk' => 'nullable|date_format:H:i', // Jam masuk (opsional)
-            'status_absensi' => 'nullable|in:I,S,A', // Status (opsional, jika tidak masuk kerja)
-             // Pastikan tidak ada absensi duplikat untuk karyawan di tanggal yg sama
-            Rule::unique('attendance')->where(function ($query) use ($request) {
-                return $query->where('karyawan_id', $request->karyawan_id)
-                             ->where('tanggal', $request->tanggal);
-            }),
+            'waktu_masuk' => 'nullable|date_format:H:i',
+            'status_absensi' => 'nullable|in:I,S', // Hanya I atau S yang bisa diinput manual selain jam masuk
         ]);
 
         $data = $request->only(['karyawan_id', 'tanggal']);
@@ -56,31 +60,23 @@ class AttendanceController extends Controller
         $statusInput = $request->input('status_absensi');
 
         if ($waktuMasukInput) {
-            // --- Logika 1: Jika Karyawan Masuk (Hadir / Telat) ---
             $data['waktu_masuk'] = $waktuMasukInput;
-            $data['waktu_keluar'] = '16:00:00'; // Jam keluar otomatis
+            $data['waktu_keluar'] = '16:00:00';
 
-            // Tentukan status H (Hadir) atau HT (Hadir Terlambat)
             $jamMasuk = Carbon::parse($waktuMasukInput);
             $batasJamMasuk = Carbon::parse('07:00:00');
             $batasJamTelat = Carbon::parse('09:00:00');
 
-            if ($jamMasuk->between($batasJamMasuk, $batasJamTelat, true)) { // true = inklusif (tepat jam 7/9)
+            if ($jamMasuk->between($batasJamMasuk, $batasJamTelat, true)) {
                 $data['status_absensi'] = 'H';
-            } else if ($jamMasuk->gt($batasJamTelat)) { // Lebih dari jam 9
-                $data['status_absensi'] = 'HT';
-            } else {
-                 // Masuk sebelum jam 7 (dianggap Hadir)
-                 $data['status_absensi'] = 'H';
+            } else { // Sebelum jam 7 atau setelah jam 9
+                $data['status_absensi'] = $jamMasuk->gt($batasJamTelat) ? 'HT' : 'H';
             }
-
         } elseif (in_array($statusInput, ['I', 'S'])) {
-            // --- Logika 2: Jika Karyawan Izin atau Sakit ---
             $data['status_absensi'] = $statusInput;
             $data['waktu_masuk'] = null;
             $data['waktu_keluar'] = null;
         } else {
-            // --- Logika 3: Jika tidak input jam masuk atau I/S, dianggap Alpha ---
             $data['status_absensi'] = 'A';
             $data['waktu_masuk'] = null;
             $data['waktu_keluar'] = null;
@@ -97,7 +93,7 @@ class AttendanceController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Tidak digunakan
     }
 
     /**
@@ -107,10 +103,10 @@ class AttendanceController extends Controller
     {
         $attendance = Attendance::findOrFail($id);
         
-        // Logika Bisnis: Hanya status 'A' (Alpha) yang boleh diubah
-        if ($attendance->status_absensi !== 'A') {
+        // Logika Bisnis: Hanya status 'A' atau 'HT' yang boleh masuk form edit
+        if (!in_array($attendance->status_absensi, ['A', 'HT'])) {
             return redirect()->route('attendances.index')
-                             ->with('error', 'Hanya absensi dengan status Alpha (A) yang dapat diubah.');
+                             ->with('error', 'Hanya absensi dengan status Alpha (A) atau Hadir Terlambat (HT) yang dapat diubah.');
         }
 
         return view('attendances.edit', compact('attendance'));
@@ -123,25 +119,33 @@ class AttendanceController extends Controller
     {
         $attendance = Attendance::findOrFail($id);
 
-        // Pastikan status asal masih 'A' (jika admin buka 2 tab)
-        if ($attendance->status_absensi !== 'A') {
+        // Pastikan status asal masih A atau HT sebelum update
+        if (!in_array($attendance->status_absensi, ['A', 'HT'])) {
              return redirect()->route('attendances.index')
-                             ->with('error', 'Gagal update. Status absensi asli bukan Alpha (A).');
+                             ->with('error', 'Gagal update. Status absensi asli bukan Alpha (A) atau Hadir Terlambat (HT).');
         }
 
-        // Validasi status baru
+        // Validasi: status baru bisa apa saja dari enum
         $request->validate([
-            // Status baru hanya boleh 'I' atau 'S'
-            'status_absensi' => 'required|in:I,S',
+            'status_absensi' => ['required', Rule::in(['H', 'HT', 'I', 'S', 'A'])],
         ]);
 
-        // Update status (waktu masuk/keluar tetap null)
-        $attendance->update([
-            'status_absensi' => $request->input('status_absensi'),
-        ]);
+        $newStatus = $request->input('status_absensi');
+        $updateData = ['status_absensi' => $newStatus];
+
+        // Jika status baru adalah I, S, atau A, pastikan waktu masuk/keluar null
+        if (in_array($newStatus, ['I', 'S', 'A'])) {
+            $updateData['waktu_masuk'] = null;
+            $updateData['waktu_keluar'] = null;
+        } 
+        // Jika status baru H atau HT, biarkan waktu yang ada (jika ada dari HT)
+        // atau tetap null (jika berasal dari A). Tidak ada input waktu di form edit.
+        // Jika status asal adalah HT dan diubah ke H, waktu tetap tidak berubah.
+
+        $attendance->update($updateData);
 
         return redirect()->route('attendances.index')
-                         ->with('success', 'Status absensi Alpha (A) berhasil diubah.');
+                         ->with('success', 'Status absensi berhasil diperbarui.'); // Pesan lebih umum
     }
 
     /**
@@ -155,6 +159,7 @@ class AttendanceController extends Controller
             return redirect()->route('attendances.index')
                          ->with('success', 'Data absensi berhasil dihapus.');
         } catch (\Exception $e) {
+            // Log::error('Gagal hapus absensi: ' . $e->getMessage()); // Opsional: log error
             return redirect()->route('attendances.index')
                          ->with('error', 'Gagal menghapus data absensi.');
         }

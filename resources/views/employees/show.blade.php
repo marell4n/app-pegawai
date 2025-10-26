@@ -10,7 +10,7 @@
     <table>
         <tr>
             <th>Nama Lengkap</th>
-            <td>{{ $employee->nama_lengkap }}</td>
+            <td style="font-weight: bold;">{{ $employee->nama_lengkap }}</td>
         </tr>
         <tr>
             <th>Email</th>
@@ -56,7 +56,7 @@
             <tr>
                 <th>Bulan Gaji</th>
                 {{-- Format 'YYYY-MM' menjadi 'Nama Bulan Tahun' --}}
-                <td>{{ \Carbon\Carbon::parse($latestSalary->bulan . '-01')->format('F Y') }}</td>
+                <td>{{ \Carbon\Carbon::parse($latestSalary->bulan . '-01')->locale('id')->isoFormat('MMMM YYYY') }}</td>
             </tr>
             <tr>
                 <th>Gaji Pokok</th>
@@ -72,7 +72,7 @@
             </tr>
             <tr style="font-weight: bold;">
                 <th>Total Gaji Diterima</th>
-                <td>Rp {{ number_format($latestSalary->total_gaji, 0, ',', '.') }}</td>
+                <td style="font-weight: bold;">Rp {{ number_format($latestSalary->total_gaji, 0, ',', '.') }}</td>
             </tr>
         </table>
     @else
@@ -83,6 +83,12 @@
 <!-- Button container di luar table-detail -->
 <div class="button-container">
     <div class="action-buttons">
+        <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-edit">Edit</a>
+        <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" style="display:inline;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-delete" onclick="return confirm('Yakin ingin menghapus?')">Delete</button>
+        </form>
         <a href="{{ route('employees.index') }}" class="btn btn-back">Kembali</a>
     </div>
 </div>

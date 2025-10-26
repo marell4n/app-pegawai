@@ -8,7 +8,7 @@ h1 {
 }
 
 .table-container {
-    background: #C2DC80;
+    background: #733D26;
     max-width: 100%;
     margin: 0 auto;
     border-radius: 15px;
@@ -28,10 +28,11 @@ thead {
 
 th, td {
     border-right: 1px solid rgba(213, 105, 137, 0.2);
+    border-bottom: 1px solid rgba(213, 105, 137, 0.2);
 }
 
 th {
-    color: #D56989;
+    color: rgb(255, 255, 255);
     font-weight: 700;
     font-size: 14px;
     font-family: "Noto Sans", sans-serif;
@@ -50,7 +51,7 @@ tbody tr:last-child {
 }
 
 td {
-    background: rgba(255, 255, 255, 0.8);
+    background: #F9D0DE;
     color: #333;
     font-size: 13px;
     font-weight: 400;
@@ -61,7 +62,7 @@ td {
 }
 
 tbody tr:hover td {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgb(255, 255, 255);
     transition: all 0.3s ease;
 }
 
@@ -91,17 +92,17 @@ tbody tr:hover td {
 }
 
 .btn-detail {
-    background: #D56989;
+    background: #F790B2;
     box-shadow: 0 2px 8px rgba(213, 105, 137, 0.3);
 }
 
 .btn-edit {
-    background: #EA9CAF;
+    background: #AF7F73;
     box-shadow: 0 2px 8px rgba(234, 156, 175, 0.3);
 }
 
 .btn-delete {
-    background: #C2616C;
+    background: #733D26;
     box-shadow: 0 2px 8px rgba(194, 97, 108, 0.3);
 }
 
@@ -127,7 +128,7 @@ tbody tr:hover td {
 }
 
 .btn-add {
-    background: #C2DC80;
+    background: #733D26;
     padding: 18px 24px;
     font-size: 16px;
     font-weight: 700;
@@ -155,7 +156,7 @@ tbody tr:hover td {
 .btn-add:hover {
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 12px 35px rgba(213, 105, 137, 0.6);
-    background: #c2576f;
+    background: #562a17;
 }
 
 .btn-add:active {

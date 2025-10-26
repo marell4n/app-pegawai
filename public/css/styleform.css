@@ -26,18 +26,19 @@ h1 {
 
 /* Form Container Style */
 form {
-    background: #C2DC80;
+    background: #AF7F73;
     max-width: 700px;
     margin: 30px auto;
     border-radius: 15px;
     box-shadow: 0 15px 35px rgba(213, 105, 137, 0.3);
     overflow: hidden;
+    padding: 20px;
 }
 
 /* Table Style within Form */
 form table {
     width: 100%;
-    padding: 50px;
+    padding: 30px;
     border-collapse: collapse;
 }
 
@@ -49,7 +50,7 @@ form td {
 /* Label Style */
 label {
     font-weight: 600;
-    color: #333;
+    color: #ffffff;
     font-size: 14px;
     display: block;
     margin-bottom: 5px;
@@ -82,7 +83,7 @@ textarea {
 /* Style for input hints/small text */
 small {
     display: block;
-    color: #777;
+    color: #ffffff;
     font-size: 12px;
     margin-top: 5px;
 }
@@ -95,27 +96,10 @@ form td[colspan="2"] {
 
 /* Submit Button Style */
 button[type="submit"] {
-    background: #D56989;
+    background: #733D26;
     color: white;
     border: none;
-    padding: 15px 35px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(213, 105, 137, 0.4);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: inline-block;
-    margin-left: 10px;
-}
-
-/* Back Link Button Style */
-.btn-back {
-    background: #EA9CAF;
-    color: white !important;
-    text-decoration: none;
-    padding: 15px 35px;
+    padding: 0.94em 2.2em;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 600;
@@ -125,6 +109,29 @@ button[type="submit"] {
     letter-spacing: 1px;
     display: inline-block;
     margin-left: 10px;
+    text-decoration: none; 
+    line-height: normal; 
+    vertical-align: middle;
+}
+
+/* Back Link Button Style */
+.btn-back {
+    background: #EA9CAF;
+    color: white !important;
+    border: none;
+    padding: 0.94em 2.2em;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(234, 156, 175, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-block;
+    margin-left: 10px;
+    text-decoration: none; 
+    line-height: normal; 
+    vertical-align: middle;
 }
 
 /* Hover State for Buttons */
@@ -170,10 +177,11 @@ button[type="submit"]:hover,
     form {
         margin-top: 20px;
         max-width: 100%;
+        padding: 10px;
     }
 
     form table {
-        padding: 30px;
+        padding: 15px;
     }
 
     form td:first-child {
@@ -199,9 +207,10 @@ button[type="submit"]:hover,
 
     button[type="submit"],
     .btn-back {
-        width: auto;
+        width: 150px;
+        text-align: center;
         margin: 10px 5px;
-        padding: 12px 25px;
+        padding: 0.86em 1.8em;
         font-size: 14px;
     }
 }
@@ -212,12 +221,14 @@ button[type="submit"]:hover,
     }
 
     form table {
-        padding: 20px;
+        padding: 50px;
     }
 
     button[type="submit"],
     .btn-back {
-         padding: 10px 20px;
-         font-size: 13px;
+        width: 120px;
+        text-align: center;
+        padding: 0.77em 1.5em;
+        font-size: 13px;
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/styleform.css') }}">
 
-<h1>Edit Status Absensi Alpha (A)</h1>
+<h1>Edit Status Absensi</h1>
 
 @if ($errors->any())
     <div style="color: red; margin-bottom: 15px;">
@@ -32,8 +32,20 @@
         </tr>
         <tr>
             <td><label>Status Asal:</label></td>
-            {{-- Data ini tidak bisa diubah --}}
-            <td><input type="text" value="A (Alpha)" disabled style="color: red; font-weight: bold;"></td>
+            <td>
+                @php
+                    $statusAsalText = $attendance->status_absensi;
+                    $statusColor = 'black';
+                    if ($attendance->status_absensi == 'A') {
+                        $statusAsalText = 'A (Alpha)';
+                        $statusColor = 'red';
+                    } elseif ($attendance->status_absensi == 'HT') {
+                        $statusAsalText = 'HT (Hadir Terlambat)';
+                        $statusColor = 'orange';
+                    }
+                @endphp
+                <span style="font-weight: bold; color: {{ $statusColor }};"> {{ $statusAsalText }} </span>
+            </td>
         </tr>
 
         {{-- Ini satu-satunya input yang bisa diubah --}}
@@ -42,17 +54,21 @@
             <td>
                 <select id="status_absensi" name="status_absensi" required>
                     <option value="">-- Pilih Status Baru --</option>
-                    <option value="I" {{ old('status_absensi') == 'I' ? 'selected' : '' }}>Izin (I)</option>
-                    <option value="S" {{ old('status_absensi') == 'S' ? 'selected' : '' }}>Sakit (S)</option>
+                    
+                    <option value="H" {{ old('status_absensi', $attendance->status_absensi) == 'H' ? 'selected' : '' }}>Hadir (H)</option>
+                    <option value="HT" {{ old('status_absensi', $attendance->status_absensi) == 'HT' ? 'selected' : '' }}>Hadir Terlambat (HT)</option>
+                    <option value="I" {{ old('status_absensi', $attendance->status_absensi) == 'I' ? 'selected' : '' }}>Izin (I)</option>
+                    <option value="S" {{ old('status_absensi', $attendance->status_absensi) == 'S' ? 'selected' : '' }}>Sakit (S)</option>
+                    <option value="A" {{ old('status_absensi', $attendance->status_absensi) == 'A' ? 'selected' : '' }}>Alpha (A)</option>
                 </select>
-                <small style="display: block; color: #777;">Hanya dapat diubah menjadi Izin atau Sakit.</small>
+                <small>Pilih status baru untuk menggantikan status asal.</small>
             </td>
         </tr>
 
         <tr>
             <td colspan="2" style="text-align:right; padding-top: 20px;">
-                <button type="submit">Update Status</button>
-                <a href="{{ route('attendances.index') }}" class="btn btn-back" style="margin-left: 10px; text-decoration: none; display: inline-block; background: #EA9CAF; color: white; padding: 15px 30px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(213, 105, 137, 0.4); text-transform: uppercase; letter-spacing: 1px;">Kembali</a>
+                <a href="{{ route('attendances.index') }}" class="btn btn-back">Kembali</a>
+                <button type="submit">Simpan</button>
             </td>
         </tr>
     </table>

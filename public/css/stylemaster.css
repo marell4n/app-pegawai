@@ -14,7 +14,7 @@
 
 body {
     font-family: "Noto Sans", sans-serif;
-    background: #F3EEF1;
+    background: whitesmoke;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@ body {
 
 /* ========== NAVBAR STYLES (FIXED) ========== */
 header {
-    background: #D56989;
+    background: #F790B2;
     position: fixed;
     top: 0;
     left: 0;
@@ -44,7 +44,7 @@ header {
 }
 
 nav {
-    background: rgba(255, 255, 255, 0.15);
+    background: #F8B0C8;
     backdrop-filter: blur(10px);
 }
 
@@ -86,7 +86,7 @@ nav ul li a::after {
 }
 
 nav ul li a:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: #AF7F73;
 }
 
 nav ul li a:hover::after {
@@ -94,7 +94,7 @@ nav ul li a:hover::after {
 }
 
 nav ul li a.active {
-    background: rgba(255, 255, 255, 0.25);
+    background: #733D26;
 }
 
 nav ul li a.active::after {
@@ -107,7 +107,7 @@ nav ul li a.active::after {
     position: absolute;
     top: 20px;
     right: 20px;
-    background: rgba(255, 255, 255, 0.2);
+    background: #733D26;
     border: none;
     width: 45px;
     height: 45px;
@@ -117,7 +117,7 @@ nav ul li a.active::after {
 }
 
 .menu-toggle:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: #4a2312;
 }
 
 .menu-toggle span {
@@ -156,7 +156,7 @@ main {
 
 /* ========== FOOTER ========== */
 footer {
-    color: #D56989;
+    color: #733D26;
     text-align: center;
     padding: 20px;
     margin-top: auto;
