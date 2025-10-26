@@ -1,7 +1,10 @@
 @extends('master')
 @section('title', 'Daftar Posisi / Jabatan')
 @section('content')
-<h1>Daftar Posisi / Jabatan</h1>
+
+<link rel="stylesheet" href="{{ asset('css/styleindex.css') }}">
+
+<h1>Daftar Jabatan</h1>
 
 {{-- Pesan Sukses/Error --}}
 @if (session('success'))

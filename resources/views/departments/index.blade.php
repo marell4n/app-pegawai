@@ -1,6 +1,9 @@
 @extends('master')
 @section('title', 'Daftar Departemen')
 @section('content')
+
+<link rel="stylesheet" href="{{ asset('css/styleindex.css') }}">
+
 <h1>Daftar Departemen</h1>
 
 {{-- Pesan Sukses/Error --}}
@@ -23,7 +26,7 @@
         <tbody>
             @forelse($departments as $department)
                 <tr>
-                    <td>{{ $department->id }}</td>
+                    <td >{{ $department->id }}</td>
                     <td>{{ $department->nama_department }}</td>
                     <td>
                         <div class="action-buttons">

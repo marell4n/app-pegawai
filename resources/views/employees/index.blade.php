@@ -1,8 +1,10 @@
 @extends('master')
 @section('title', 'Daftar Pegawai')
 @section('content')
+
+<link rel="stylesheet" href="{{ asset('css/styleindex.css') }}">
+
 <h1>Daftar Pegawai</h1>
-{{-- Pesan Sukses/Error --}}
 @if (session('success'))
     <div style="color: green; margin-bottom: 15px; text-align: center;">{{ session('success') }}</div>
 @endif

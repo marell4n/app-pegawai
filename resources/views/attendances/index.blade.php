@@ -1,6 +1,9 @@
 @extends('master')
 @section('title', 'Daftar Absensi')
 @section('content')
+
+<link rel="stylesheet" href="{{ asset('css/styleindex.css') }}">
+
 <h1>Daftar Absensi</h1>
 
 {{-- Pesan Sukses/Error --}}

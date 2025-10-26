@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="{{ asset('css/stylemaster.css') }}">
 </head>
 <body>
-    <!-- Navbar di atas -->
-    <header>
+    <!-- Navbar di atas (Fixed) -->
+    <header class="header-fixed">
         <div class="navbar-header">
             <h1>App Pegawai</h1>
             <!-- Hamburger button untuk mobile -->
@@ -27,12 +27,12 @@
         </nav>
     </header>
 
-    <!-- Main content -->
-    <main>
+    <!-- Main content dengan padding -->
+    <main class="main-content">
         @yield('content')
     </main>
 
-    <!-- Footer -->
+    <!-- Footer (Fixed) -->
     <footer>
         <p>&copy; {{ date('Y') }} App Pegawai. All rights reserved.</p>
     </footer>

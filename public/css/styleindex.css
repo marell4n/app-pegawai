@@ -1,0 +1,297 @@
+/* ========== TABLE & INDEX STYLES ========== */
+h1 {
+    color: #D56989;
+    text-align: center;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.table-container {
+    background: #C2DC80;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(213, 105, 137, 0.3);
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+}
+
+thead {
+    background: rgba(213, 105, 137, 0.2);
+}
+
+th, td {
+    border-right: 1px solid rgba(213, 105, 137, 0.2);
+}
+
+th {
+    color: #D56989;
+    font-weight: 700;
+    font-size: 14px;
+    font-family: "Noto Sans", sans-serif;
+    padding: 20px 15px;
+    text-align: center;
+    border-bottom: 2px solid rgba(213, 105, 137, 0.3);
+    white-space: nowrap;
+}
+
+tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+td {
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    font-size: 13px;
+    font-weight: 400;
+    font-family: "Noto Sans", sans-serif;
+    padding: 15px;
+    vertical-align: top;
+    text-align: center;
+}
+
+tbody tr:hover td {
+    background: rgba(255, 255, 255, 0.95);
+    transition: all 0.3s ease;
+}
+
+/* Action buttons */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: "Noto Sans", sans-serif;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    color: white;
+}
+
+.btn-detail {
+    background: #D56989;
+    box-shadow: 0 2px 8px rgba(213, 105, 137, 0.3);
+}
+
+.btn-edit {
+    background: #EA9CAF;
+    box-shadow: 0 2px 8px rgba(234, 156, 175, 0.3);
+}
+
+.btn-delete {
+    background: #C2616C;
+    box-shadow: 0 2px 8px rgba(194, 97, 108, 0.3);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(213, 105, 137, 0.4);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Floating Add Button */
+.button-container {
+    margin: 20px auto 0;
+}
+
+.add-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+}
+
+.btn-add {
+    background: #D56989;
+    padding: 18px 24px;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 25px rgba(213, 105, 137, 0.5);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-add::before {
+    content: '+';
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.btn-add:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 35px rgba(213, 105, 137, 0.6);
+    background: #c2576f;
+}
+
+.btn-add:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+/* Status styling */
+.status-aktif {
+    color: #28a745;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-nonaktif {
+    color: #dc3545;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+/* Scrollbar table */
+.table-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: rgba(213, 105, 137, 0.5);
+    border-radius: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(213, 105, 137, 0.7);
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    h1 {
+        font-size: 2.2em;
+    }
+
+    .add-button {
+        bottom: 25px;
+        right: 25px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    table {
+        min-width: 700px;
+    }
+
+    th {
+        padding: 15px 10px;
+        font-size: 12px;
+    }
+
+    td {
+        padding: 12px 10px;
+        font-size: 11px;
+    }
+
+    .btn {
+        padding: 6px 12px;
+        font-size: 10px;
+    }
+
+    /* Floating button untuk mobile */
+    .add-button {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .btn-add {
+        padding: 16px 20px;
+        font-size: 14px;
+    }
+}
+
+/* Mobile Portrait */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+
+    table {
+        min-width: 600px;
+    }
+
+    th {
+        padding: 12px 8px;
+        font-size: 11px;
+    }
+
+    td {
+        padding: 10px 8px;
+        font-size: 10px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 4px;
+        align-items: stretch;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+        padding: 8px 10px;
+    }
+
+    /* Floating button untuk mobile portrait */
+    .add-button {
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .btn-add {
+        padding: 14px 18px;
+        font-size: 13px;
+        border-radius: 40px;
+    }
+
+    .btn-add::before {
+        font-size: 20px;
+    }
+}

@@ -9,15 +9,15 @@
 }
 
 body {
-    font-family: "Noto Sans", sans-serif; /* Menggunakan font Noto Sans */
-    background: #F3EEF1; /* Warna latar belakang body */
+    font-family: "Noto Sans", sans-serif;
+    background: #F3EEF1;
     min-height: 100vh;
     padding: 20px;
 }
 
 /* Heading Style */
 h1 {
-    color: #D56989; /* Warna heading utama */
+    color: #D56989;
     text-align: center;
     font-size: 2.5em;
     font-weight: 700;
@@ -26,166 +26,124 @@ h1 {
 
 /* Form Container Style */
 form {
-    background: #C2DC80; /* Warna latar belakang form */
-    max-width: 600px; /* Lebar maksimum form */
-    margin: 30px auto; /* Margin atas/bawah 30px, auto untuk tengah */
-    border-radius: 15px; /* Sudut melengkung */
-    box-shadow: 0 15px 35px rgba(213, 105, 137, 0.3); /* Bayangan */
-    overflow: hidden; /* Mengatasi overflow konten */
-    animation: slideUp 0.6s ease-out; /* Animasi muncul */
+    background: #C2DC80;
+    max-width: 700px;
+    margin: 30px auto;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(213, 105, 137, 0.3);
+    overflow: hidden;
 }
 
 /* Table Style within Form */
 form table {
     width: 100%;
-    padding: 40px; /* Padding di dalam tabel */
-    border-collapse: collapse; /* Menghilangkan jarak antar border sel */
+    padding: 50px;
+    border-collapse: collapse;
 }
 
 form td {
-    padding: 10px 0; /* Padding atas/bawah 10px */
-    vertical-align: top; /* Rata atas untuk konten sel */
-}
-
-/* Style untuk kolom label (td pertama) */
-form td:first-child {
-    width: 30%; /* Lebar kolom label */
-    padding-right: 20px; /* Jarak kanan dari label ke input */
+    padding: 20px;
+    vertical-align: top;
 }
 
 /* Label Style */
 label {
     font-weight: 600;
-    color: #333; /* Warna teks label */
+    color: #333;
     font-size: 14px;
-    display: block; /* Agar label memenuhi lebar */
-    margin-bottom: 5px; /* Jarak bawah dari label ke input */
+    display: block;
+    margin-bottom: 5px;
 }
 
-/* Input Fields, Textarea, Select Style */
+/* Input Fields, Textarea, Select Style - TAMPILAN BIASA */
 input[type="text"],
 input[type="email"],
 input[type="date"],
-input[type="time"], /* Menambahkan type time */
-input[type="number"], /* Menambahkan type number */
+input[type="time"],
+input[type="number"],
 textarea,
 select {
     width: 100%;
-    padding: 12px 15px;
-    border: 2px solid #EA9CAF; /* Border awal */
-    border-radius: 8px; /* Sudut melengkung input */
+    padding: 14px 16px;
+    border: 2px solid #EA9CAF;
+    border-radius: 8px;
     font-size: 14px;
-    font-family: inherit; /* Menggunakan font dari body */
-    transition: all 0.3s ease; /* Transisi halus */
-    background: white; /* Latar belakang input */
-    color: #333; /* Warna teks input */
-}
-
-/* Focus State for Input Fields */
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="date"]:focus,
-input[type="time"]:focus,
-input[type="number"]:focus,
-textarea:focus,
-select:focus {
-    outline: none; /* Menghilangkan outline default */
-    border-color: #D56989; /* Warna border saat fokus */
-    background: linear-gradient(45deg, #fff 0%, #F3EEF1 100%); /* Latar belakang gradasi saat fokus */
-    box-shadow: 0 0 0 3px rgba(213, 105, 137, 0.2); /* Bayangan saat fokus */
-    transform: translateY(-1px); /* Sedikit naik saat fokus */
+    font-family: inherit;
+    background: white;
+    color: #333;
 }
 
 /* Textarea Specific Style */
 textarea {
-    resize: vertical; /* Hanya bisa di-resize vertikal */
-    min-height: 80px; /* Tinggi minimum textarea */
-}
-
-/* Select Box Specific Style */
-select {
-    cursor: pointer;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e"); /* Icon panah dropdown */
-    background-position: right 12px center;
-    background-repeat: no-repeat;
-    background-size: 16px;
-    padding-right: 40px; /* Padding kanan untuk icon */
-    appearance: none; /* Menghilangkan tampilan default browser */
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    resize: vertical;
+    min-height: 100px;
 }
 
 /* Style for input hints/small text */
 small {
-    display: block; /* Agar full width */
-    color: #777; /* Warna teks hint */
+    display: block;
+    color: #777;
     font-size: 12px;
-    margin-top: 5px; /* Jarak atas dari input */
+    margin-top: 5px;
 }
 
-/* Button Container (usually the last td) */
+/* Button Container */
 form td[colspan="2"] {
-    text-align: right; /* Rata kanan untuk tombol */
-    padding-top: 20px; /* Jarak atas sebelum tombol */
+    text-align: right;
+    padding-top: 25px;
 }
 
 /* Submit Button Style */
 button[type="submit"] {
-    background: #D56989; /* Warna latar tombol submit */
+    background: #D56989;
     color: white;
     border: none;
-    padding: 15px 30px;
+    padding: 15px 35px;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(213, 105, 137, 0.4); /* Bayangan tombol */
-    text-transform: uppercase; /* Teks kapital */
-    letter-spacing: 1px; /* Jarak antar huruf */
-    display: inline-block; /* Agar margin bisa diterapkan */
-    margin-left: 10px; /* Jarak kiri jika ada tombol lain */
-}
-
-/* Back Link Button Style */
-.btn-back {
-    background: #EA9CAF; /* Warna latar tombol kembali */
-    color: white !important; /* Paksa warna teks putih */
-    text-decoration: none; /* Hilangkan garis bawah */
-    padding: 15px 30px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(234, 156, 175, 0.4); /* Bayangan tombol */
+    box-shadow: 0 4px 15px rgba(213, 105, 137, 0.4);
     text-transform: uppercase;
     letter-spacing: 1px;
     display: inline-block;
     margin-left: 10px;
 }
 
-/* Hover & Active State for Buttons */
-button[type="submit"]:hover,
-.btn-back:hover {
-    transform: translateY(-2px); /* Efek naik saat hover */
-    box-shadow: 0 6px 20px rgba(213, 105, 137, 0.6); /* Bayangan lebih besar saat hover */
+/* Back Link Button Style */
+.btn-back {
+    background: #EA9CAF;
+    color: white !important;
+    text-decoration: none;
+    padding: 15px 35px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(234, 156, 175, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-block;
+    margin-left: 10px;
 }
 
-button[type="submit"]:active,
-.btn-back:active {
-    transform: translateY(0); /* Kembali ke posisi normal saat diklik */
-    box-shadow: 0 4px 15px rgba(213, 105, 137, 0.4); /* Bayangan normal saat diklik */
+/* Hover State for Buttons */
+button[type="submit"]:hover,
+.btn-back:hover {
+    opacity: 0.9;
 }
 
 /* Error Message Style */
-.error-message { /* Ganti style div error jika perlu */
+.error-message {
     color: red;
     background-color: rgba(255, 0, 0, 0.1);
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 20px;
     border: 1px solid rgba(255, 0, 0, 0.2);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .error-message strong {
@@ -196,18 +154,6 @@ button[type="submit"]:active,
 .error-message ul {
     list-style-position: inside;
     padding-left: 5px;
-}
-
-/* Form Animation */
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 /* Responsive Design */
@@ -223,47 +169,50 @@ button[type="submit"]:active,
 
     form {
         margin-top: 20px;
+        max-width: 100%;
     }
 
     form table {
-        padding: 20px; /* Padding lebih kecil di tablet/mobile */
+        padding: 30px;
     }
 
-    /* Tampilkan label di atas input pada layar kecil */
     form td:first-child {
         width: 100%;
         padding-right: 0;
-        padding-bottom: 5px; /* Jarak bawah label ke input */
+        padding-bottom: 5px;
     }
 
     form tr {
-        display: block; /* Tiap baris jadi block */
-        margin-bottom: 15px; /* Jarak antar "baris" */
+        display: block;
+        margin-bottom: 15px;
     }
 
     form td {
-        display: block; /* Tiap sel jadi block */
+        display: block;
         width: 100%;
-        padding: 5px 0; /* Padding lebih kecil */
+        padding: 5px 0;
     }
 
-    /* Tombol rata tengah atau full width di mobile */
     form td[colspan="2"] {
-        text-align: center; /* Atau 'left' jika ingin full width */
+        text-align: center;
     }
 
     button[type="submit"],
     .btn-back {
-        width: auto; /* Atau '100%' jika ingin full width */
-        margin: 10px 5px; /* Margin atas/bawah dan samping */
-        padding: 12px 25px; /* Padding lebih kecil */
-        font-size: 14px; /* Font lebih kecil */
+        width: auto;
+        margin: 10px 5px;
+        padding: 12px 25px;
+        font-size: 14px;
     }
 }
 
 @media (max-width: 480px) {
     h1 {
         font-size: 1.8em;
+    }
+
+    form table {
+        padding: 20px;
     }
 
     button[type="submit"],

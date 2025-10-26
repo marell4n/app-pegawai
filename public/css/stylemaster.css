@@ -20,18 +20,27 @@ body {
     flex-direction: column;
 }
 
-/* ========== NAVBAR STYLES ========== */
+/* ========== NAVBAR STYLES (FIXED) ========== */
 header {
     background: #D56989;
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
+    box-shadow: 0 4px 15px rgba(213, 105, 137, 0.3);
+}
+
+.navbar-header {
+    padding: 15px 20px;
+    position: relative;
 }
 
 .navbar-header h1 {
     color: white;
     text-align: center;
     text-transform: uppercase;
+    margin: 10px;
 }
 
 nav {
@@ -121,202 +130,43 @@ nav ul li a.active::after {
     border-radius: 2px;
 }
 
-/* ========== MAIN CONTENT ========== */
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* ========== MAIN CONTENT WRAPPER ========== */
 main {
     flex: 1;
     padding: 40px;
     width: 100%;
     max-width: 1400px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 130px; /* Tinggi navbar (header + nav) */
+    margin-bottom: 0;
 }
 
-/* ========== TABLE & INDEX STYLES ========== */
-h1 {
-    color: #D56989;
-    text-align: center;
-    font-size: 2.5em;
-    font-family: "Noto Sans", sans-serif;
-    font-weight: 700;
-    margin-bottom: 30px;
-}
-
-.table-container {
-    background: #C2DC80;
-    max-width: 100%;
-    margin: 0 auto;
-    border-radius: 15px;
-    box-shadow: 0 15px 35px rgba(213, 105, 137, 0.3);
-    overflow-x: auto;
-    animation: slideUp 0.6s ease-out;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    border: none;
-}
-
-thead {
-    background: rgba(213, 105, 137, 0.2);
-}
-
-th {
-    color: #D56989;
-    font-weight: 700;
-    font-size: 14px;
-    font-family: "Noto Sans", sans-serif;
-    padding: 20px 15px;
-    text-align: left;
-    border-bottom: 2px solid rgba(213, 105, 137, 0.3);
-    white-space: nowrap;
-}
-
-tbody tr {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-tbody tr:last-child {
-    border-bottom: none;
-}
-
-td {
-    background: rgba(255, 255, 255, 0.8);
-    color: #333;
-    font-size: 13px;
-    font-weight: 400;
-    font-family: "Noto Sans", sans-serif;
-    padding: 15px;
-    vertical-align: top;
-}
-
-tbody tr:hover td {
-    background: rgba(255, 255, 255, 0.95);
-    transition: all 0.3s ease;
-}
-
-/* Action buttons */
-.action-buttons {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.btn {
-    display: inline-block;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    font-family: "Noto Sans", sans-serif;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    color: white;
-}
-
-.btn-detail {
-    background: #D56989;
-    box-shadow: 0 2px 8px rgba(213, 105, 137, 0.3);
-}
-
-.btn-edit {
-    background: #EA9CAF;
-    box-shadow: 0 2px 8px rgba(234, 156, 175, 0.3);
-}
-
-.btn-delete {
-    background: #C2616C;
-    box-shadow: 0 2px 8px rgba(194, 97, 108, 0.3);
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(213, 105, 137, 0.4);
-}
-
-.btn:active {
-    transform: translateY(0);
-}
-
-/* Add button */
-.button-container {
-    margin: 20px auto 0;
-}
-
-.add-button {
-    text-align: right;
-    padding: 0;
-}
-
-.btn-add {
-    background: #D56989;
-    padding: 15px 30px;
-    font-size: 16px;
-    font-weight: 600;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(213, 105, 137, 0.4);
-    transition: all 0.3s ease;
-    display: inline-block;
-}
-
-.btn-add:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(213, 105, 137, 0.6);
-}
-
-/* Status styling */
-.status-aktif {
-    color: #28a745;
-    font-weight: 600;
-    text-transform: capitalize;
-}
-
-.status-nonaktif {
-    color: #dc3545;
-    font-weight: 600;
-    text-transform: capitalize;
-}
-
-/* Footer */
+/* ========== FOOTER ========== */
 footer {
-    background: #D56989;
-    color: white;
+    color: #D56989;
     text-align: center;
     padding: 20px;
     margin-top: auto;
-    box-shadow: 0 -4px 15px rgba(213, 105, 137, 0.2);
+    width: 100%;
 }
 
 footer p {
     font-size: 14px;
     font-weight: 500;
-}
-
-/* Scrollbar table */
-.table-container::-webkit-scrollbar {
-    height: 8px;
-}
-
-.table-container::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-}
-
-.table-container::-webkit-scrollbar-thumb {
-    background: rgba(213, 105, 137, 0.5);
-    border-radius: 10px;
-}
-
-.table-container::-webkit-scrollbar-thumb:hover {
-    background: rgba(213, 105, 137, 0.7);
+    margin: 0;
 }
 
 /* ========== RESPONSIVE DESIGN ========== */
@@ -325,10 +175,7 @@ footer p {
 @media (max-width: 1024px) {
     main {
         padding: 30px 20px;
-    }
-
-    h1 {
-        font-size: 2.2em;
+        margin-top: 130px;
     }
 }
 
@@ -381,39 +228,15 @@ footer p {
 
     main {
         padding: 30px 20px;
+        margin-top: 80px;
     }
 
-    h1 {
-        font-size: 1.8em;
-        margin-bottom: 20px;
+    footer {
+        padding: 15px;
     }
 
-    table {
-        min-width: 700px;
-    }
-
-    th {
-        padding: 15px 10px;
+    footer p {
         font-size: 12px;
-    }
-
-    td {
-        padding: 12px 10px;
-        font-size: 11px;
-    }
-
-    .btn {
-        padding: 6px 12px;
-        font-size: 10px;
-    }
-
-    .btn-add {
-        padding: 12px 20px;
-        font-size: 14px;
-    }
-
-    .add-button {
-        text-align: center;
     }
 }
 
@@ -430,51 +253,6 @@ footer p {
 
     main {
         padding: 20px 15px;
-    }
-
-    h1 {
-        font-size: 1.5em;
-        margin-bottom: 15px;
-    }
-
-    table {
-        min-width: 600px;
-    }
-
-    th {
-        padding: 12px 8px;
-        font-size: 11px;
-    }
-
-    td {
-        padding: 10px 8px;
-        font-size: 10px;
-    }
-
-    .action-buttons {
-        flex-direction: column;
-        gap: 4px;
-        align-items: stretch;
-    }
-
-    .btn {
-        width: 100%;
-        text-align: center;
-        padding: 8px 10px;
-    }
-
-    .btn-add {
-        width: 100%;
-        padding: 12px 15px;
-        font-size: 13px;
-    }
-
-    footer p {
-        font-size: 12px;
-    }
-
-    .table-container::after {
-        font-size: 10px;
-        padding: 8px;
+        margin-top: 70px;
     }
 }
