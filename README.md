@@ -44,10 +44,9 @@
 1.  **Ambil Kode Proyek:**
     * **Kalau ini pertama kali:** Buka Terminal atau Command Prompt, arahin ke folder tempat kamu mau nyimpen proyek, terus *clone* repositorinya:
         ```bash
-        git clone <URL_REPOSITORY_KAMU> app-pegawai
+        git clone https://github.com/marell4n/app-pegawai.git app-pegawai
         cd app-pegawai
         ```
-        *(Ganti `<URL_REPOSITORY_KAMU>` dengan URL Git repositori kamu)*
     * **Kalau udah punya proyeknya & mau update:** Buka Terminal, masuk ke folder proyekmu, terus *pull* perubahan terbaru dari branch default (misalnya `main` atau `master`):
         ```bash
         git pull origin main
