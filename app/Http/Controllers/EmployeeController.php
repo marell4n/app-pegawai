@@ -164,9 +164,6 @@ class EmployeeController extends Controller
                              ->with('success', 'Data pegawai berhasil diperbarui dan gaji telah disesuaikan.');
         }
         // -----
-
-        return redirect()->route('employees.index')
-                         ->with('success', 'Data pegawai berhasil diperbarui.');
     }
 
     /**

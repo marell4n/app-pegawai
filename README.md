@@ -76,7 +76,15 @@
 
 5.  **Konfigurasi Database:**
     * Buka file `.env`.
-    * Edit settingan database (`DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`) biar cocok sama database di laptopmu.
+    * Edit settingan database menjadi:
+        ```bash
+        DB_CONNECTION=mysql
+        DB_HOST=127.0.0.1
+        DB_PORT=3306
+        DB_DATABASE=db_pegawai
+        DB_USERNAME=root
+        DB_PASSWORD=
+        ```
     * **Penting:** Pastiin database dengan nama yang kamu tulis di `DB_DATABASE` udah kamu buat di sistem database-mu (misalnya lewat phpMyAdmin, MySQL Workbench, dll.).
 
 6.  **Jalanin Migrasi Database:**
