@@ -23,7 +23,7 @@
         {{-- Input 2: Dropdown Tanggal --}}
         <div class="filter-group">
             <label for="search_date" class="filter-label">Tanggal:</label>
-            <input type="date" name="search_date" id="search_date" class="filter-input date-input" value="{{ request('search_date') }}">
+            <input type="date" name="search_date" id="search_date" class="filter-input date-input" value="{{ $searchDate }}">
         </div>
 
         <button type="submit">Filter</button>
@@ -31,7 +31,7 @@
         {{-- Tombol Reset jika ada filter yang aktif --}}
         @if(request('search_name') || request('search_date'))
             <a href="{{ route('attendances.index') }}" style="display: flex; align-items: center; color: #D56989; text-decoration: none; font-weight: bold; margin-left: 10px;">
-                ✕ Reset
+                ✕
             </a>
         @endif
     </form>

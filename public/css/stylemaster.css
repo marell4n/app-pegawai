@@ -34,6 +34,11 @@ header {
 .navbar-header {
     padding: 15px 20px;
     position: relative;
+    text-align: center;
+}
+.navbar-header h1 {
+    margin: 0;
+    line-height: 2; /* Pastikan tinggi baris teks rapat */
 }
 
 .navbar-header h1 a {
@@ -41,9 +46,9 @@ header {
     text-align: center;
     font-weight: 800;
     text-transform: uppercase;
-    margin: 10px;
     text-decoration: none;
     transition: opacity 0.3s ease;
+    margin: 0;
 }
 
 .navbar-header h1 a:hover {
@@ -112,7 +117,8 @@ nav ul li a.active::after {
 .menu-toggle {
     display: none;
     position: absolute;
-    top: 20px;
+    top: 50%;
+    transform: translateY(-50%);
     right: 20px;
     background: #733D26;
     border: none;
@@ -121,6 +127,7 @@ nav ul li a.active::after {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    z-index: 1001;
 }
 
 .menu-toggle:hover {
@@ -191,10 +198,14 @@ footer p {
     .navbar-header {
         padding: 15px 20px;
         position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .navbar-header h1 {
         font-size: 22px;
+        text-align: center;
     }
 
     .menu-toggle {
@@ -251,6 +262,7 @@ footer p {
 @media (max-width: 480px) {
     .navbar-header h1 {
         font-size: 18px;
+        text-align: center;
     }
 
     nav ul li a {

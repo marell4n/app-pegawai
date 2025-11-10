@@ -3,8 +3,6 @@
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('css/styledashboard.css') }}">
-<link rel="stylesheet" href="{{ asset('css/stylerecap.css') }}">
-
 
 {{-- === FILTER SECTION === --}}
 <form action="{{ route('dashboard') }}" method="GET" class="filter-container">
@@ -49,7 +47,7 @@
     </div>
 </div>
 
-{{-- === MATRIX RECAP SECTION === --}}
+{{-- === RECAP SECTION === --}}
 <h3 class="section-title section-title-spacing">
     Rekap Absensi Bulanan
 </h3>
@@ -77,7 +75,7 @@
                             @php
                                 $status = $attendanceMatrix[$emp->id][$d] ?? '-';
                                 
-                                // PERBAIKAN DISINI: Gunakan kode singkatan sesuai database ('H', 'HT', dst)
+                                // Gunakan kode singkatan sesuai database ('H', 'HT', dst)
                                 $cls = match($status) {
                                     'H' => 'st-H',
                                     'HT' => 'st-HT',
@@ -86,8 +84,6 @@
                                     'A' => 'st-A',
                                     default => ''
                                 };
-                                // Teks yang muncul di sel juga bisa langsung pakai statusnya
-                                // atau disesuaikan jika ingin berbeda.
                                 $txt = match($status) {
                                     'H' => 'H',
                                     'HT' => 'HT',

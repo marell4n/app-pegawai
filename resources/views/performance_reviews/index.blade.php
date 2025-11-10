@@ -20,13 +20,24 @@
     <div style="color: red; margin-bottom: 15px; text-align: center;">{{ session('error') }}</div>
 @endif
 
+{{-- === FILTER BAR === --}}
 <div class="search-container">
-    <form action="{{ route('performance-reviews.index') }}" method="GET" class="search-form">
-        <input type="text" name="search" placeholder="Cari nama pegawai..." value="{{ request('search') }}">
+    <form action="{{ route('performance-reviews.index') }}" method="GET" class="search-form" style="max-width: 600px;">
+        {{-- Input 1: Cari Nama --}}
+        <input type="text" name="search" placeholder="Cari nama pegawai..." value="{{ request('search') }}" style="flex: 2;">
+
+        {{-- Input 2: Dropdown Tanggal --}}
+        <div class="filter-group">
+            <label for="search_date" class="filter-label">Tanggal:</label>
+            <input type="date" name="search_date" id="search_date" class="filter-input date-input" value="{{ request('search_date') }}">
+        </div>
+
         <button type="submit">Cari</button>
-        @if(request('search'))
-            {{-- Tombol reset jika sedang mencari --}}
-            <a href="{{ route('performance-reviews.index') }}" style="display: flex; align-items: center; color: #D56989; text-decoration: none; font-weight: bold; margin-left: 5px;">✕ Reset</a>
+
+        @if(request('search_name') || request('search_date'))
+            <a href="{{ route('attendances.index') }}" style="display: flex; align-items: center; color: #D56989; text-decoration: none; font-weight: bold; margin-left: 10px;">
+                ✕
+            </a>
         @endif
     </form>
 </div>

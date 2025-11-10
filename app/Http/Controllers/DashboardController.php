@@ -12,14 +12,12 @@ class DashboardController extends Controller
         public function index(Request $request)
     {
         // 1. Filter Bulan & Tahun
-        // Kita set default ke waktu sekarang
         $now = Carbon::now();
         $month = (int) $request->input('month', $now->month);
         $year = (int) $request->input('year', $now->year);
         $daysInMonth = Carbon::createFromDate($year, $month)->daysInMonth;
 
-        // 2. Kartu Ringkasan Total
-        // Gunakan 'status_absensi' dan array ['H', 'HT'] untuk Hadir
+        // 2. Kartu Ringkasan Total (Tetap sama)
         $totalSummary = [
             'Hadir' => Attendance::whereMonth('tanggal', $month)->whereYear('tanggal', $year)->whereIn('status_absensi', ['H', 'HT'])->count(),
             'Sakit' => Attendance::whereMonth('tanggal', $month)->whereYear('tanggal', $year)->where('status_absensi', 'S')->count(),
@@ -27,26 +25,44 @@ class DashboardController extends Controller
             'Alpha' => Attendance::whereMonth('tanggal', $month)->whereYear('tanggal', $year)->where('status_absensi', 'A')->count(),
         ];
 
-        // 3. Data untuk Matriks Rekap
-        // Ambil pegawai aktif
-        $employees = Employee::where('status', 'aktif')->orderBy('nama_lengkap')->get();
+        // 3. Data Pegawai + Rekap Hitungan per Pegawai
+        // Tambahkan withCount untuk menghitung jumlah H/S/I/A spesifik bulan & tahun ini
+        $employees = Employee::where('status', 'aktif')
+            ->withCount([
+                'attendance as hadir_count' => function ($query) use ($month, $year) {
+                    $query->whereYear('tanggal', $year)
+                          ->whereMonth('tanggal', $month)
+                          ->whereIn('status_absensi', ['H', 'HT']);
+                },
+                'attendance as sakit_count' => function ($query) use ($month, $year) {
+                    $query->whereYear('tanggal', $year)
+                          ->whereMonth('tanggal', $month)
+                          ->where('status_absensi', 'S');
+                },
+                'attendance as izin_count' => function ($query) use ($month, $year) {
+                    $query->whereYear('tanggal', $year)
+                          ->whereMonth('tanggal', $month)
+                          ->where('status_absensi', 'I');
+                },
+                'attendance as alpha_count' => function ($query) use ($month, $year) {
+                    $query->whereYear('tanggal', $year)
+                          ->whereMonth('tanggal', $month)
+                          ->where('status_absensi', 'A');
+                }
+            ])
+            ->orderBy('nama_lengkap')
+            ->get();
 
-        // Ambil data absensi (pastikan kolomnya benar)
+        // 4. Data Matrix untuk Tabel (Tetap sama)
         $attendances = Attendance::whereMonth('tanggal', $month)
                                 ->whereYear('tanggal', $year)
                                 ->get();
 
-        // Build Matrix: [karyawan_id][tanggal] = status_absensi
         $attendanceMatrix = [];
         foreach ($attendances as $att) {
-            // Pastikan tanggal diparse dengan benar untuk mendapatkan angka hari (1-31)
             $day = (int) Carbon::parse($att->tanggal)->day;
-            // PENTING: Gunakan 'status_absensi' sesuai nama kolom di database Anda
             $attendanceMatrix[$att->karyawan_id][$day] = $att->status_absensi;
         }
-
-        // 4. (Opsional) Hitung ringkasan per pegawai untuk kartu jika diperlukan nanti
-        // Code sebelumnya menggunakan withCount di sini, bisa tetap dipakai jika ingin efisien
 
         return view('dashboard.index', compact(
             'totalSummary',

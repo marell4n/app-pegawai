@@ -22,6 +22,9 @@ class PerformanceReviewController extends Controller
                     $q->where('nama_lengkap', 'like', "%{$search}%");
                 });
             })
+            ->when($request->search_date, function ($query, $date) {
+                $query->whereDate('tanggal_review', $date);
+            })
             ->latest('tanggal_review')
             ->get();
 

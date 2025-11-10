@@ -20,7 +20,7 @@
         <button type="submit">Cari</button>
         @if(request('search'))
             {{-- Tombol reset jika sedang mencari --}}
-            <a href="{{ route('departments.index') }}" style="display: flex; align-items: center; color: #D56989; text-decoration: none; font-weight: bold; margin-left: 5px;">✕ Reset</a>
+            <a href="{{ route('departments.index') }}" style="display: flex; align-items: center; color: #D56989; text-decoration: none; font-weight: bold; margin-left: 5px;">✕</a>
         @endif
     </form>
 </div>

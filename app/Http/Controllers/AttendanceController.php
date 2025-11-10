@@ -16,21 +16,19 @@ class AttendanceController extends Controller
      */
     public function index(Request $request)
     {
-       $attendances = Attendance::with('employee')
+        $searchDate = $request->input('search_date', Carbon::now()->format('Y-m-d'));
+        $attendances = Attendance::with('employee')
             ->when($request->search_name, function ($query, $name) {
                 $query->whereHas('employee', function($q) use($name) {
                     $q->where('nama_lengkap', 'like', "%{$name}%");
                 });
             })
             // Filter ini tetap sama, akan otomatis jalan jika ada input tanggal
-            ->when($request->search_date, function ($query, $date) {
-                $query->where('tanggal', $date);
-            })
-            ->orderBy('tanggal', 'desc')
+            ->where('tanggal', $searchDate)
             ->orderBy('karyawan_id')
             ->get();
 
-        return view('attendances.index', compact('attendances'));
+        return view('attendances.index', compact('attendances', 'searchDate'));
     }
 
     /**
