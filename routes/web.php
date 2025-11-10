@@ -17,9 +17,3 @@ Route::resource('departments', DepartmentController::class);
 Route::resource('positions', PositionController::class);
 Route::resource('attendances', AttendanceController::class);
 Route::resource('performance-reviews', PerformanceReviewController::class);
-//
-Route::get('/initial-setup-database', function () {
-    // PERINGATAN: HANYA DIGUNAKAN UNTUK PERTAMA KALI DEPLOY
-    Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
-    return 'Setup Awal Database (Tabel & Data Awal) Selesai! HAPUS ROUTE INI SEKARANG!';
-});
