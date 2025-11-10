@@ -119,5 +119,5 @@
         php artisan serve
         ```
 
-10. **Buka Aplikasi:**
+9. **Buka Aplikasi:**
     Buka browser dan ketik alamat yang muncul dari `php artisan serve` (biasanya `http://127.0.0.1:8000`).
