@@ -121,3 +121,5 @@
 
 9. **Buka Aplikasi:**
     Buka browser dan ketik alamat yang muncul dari `php artisan serve` (biasanya `http://127.0.0.1:8000`).
+
+*Catatan: php 8.4.14, apache 2.4.54, mysql 3.0.30*
