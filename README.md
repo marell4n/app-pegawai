@@ -114,19 +114,7 @@
     php artisan db:seed
     ```
 
-8.  **Install Dependensi Node.js (npm):**
-    Instal dependensi frontend buat Vite (yang ngurusin CSS & JS).
-
-    ```bash
-    npm install
-    ```
-
-9.  **Jalanin Server Pengembangan Vite & Laravel:**
-    * **Terminal 1:** Jalanin server Vite buat compile aset frontend.
-        ```bash
-        npm run dev
-        ```
-    * **Terminal 2 (Buka terminal baru):** Jalanin server Laravel-nya.
+8.  **Jalanin Server Laravel:**
         ```bash
         php artisan serve
         ```
