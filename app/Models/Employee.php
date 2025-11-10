@@ -39,4 +39,9 @@ class Employee extends Model
     {
         return $this->hasMany(Salary::class, 'karyawan_id');
     }
+
+    public function performanceReviews(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(PerformanceReview::class, 'karyawan_id');
+    }
 }
