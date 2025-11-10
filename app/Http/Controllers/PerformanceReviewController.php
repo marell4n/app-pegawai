@@ -51,9 +51,7 @@ class PerformanceReviewController extends Controller
      */
     public function show(string $id)
     {
-        $performanceReview = PerformanceReview::findOrFail($id);
-
-        return view('performance_reviews.show', compact('performanceReview'));
+        //
     }
 
     /**
