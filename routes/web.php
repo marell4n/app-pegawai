@@ -18,8 +18,8 @@ Route::resource('positions', PositionController::class);
 Route::resource('attendances', AttendanceController::class);
 Route::resource('performance-reviews', PerformanceReviewController::class);
 //
-Route::get('/migrate-and-seed', function () {
+Route::get('/initial-setup-database', function () {
     // PERINGATAN: HANYA DIGUNAKAN UNTUK PERTAMA KALI DEPLOY
     Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
-    return 'Migrasi dan Seeding Selesai! HAPUS ROUTE INI SEKARANG!';
+    return 'Setup Awal Database (Tabel & Data Awal) Selesai! HAPUS ROUTE INI SEKARANG!';
 });
