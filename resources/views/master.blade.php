@@ -22,7 +22,8 @@
                 <li><a href="{{ route('employees.index') }}" class="{{ request()->is('employees*') ? 'active' : '' }}">Employees</a></li>
                 <li><a href="{{ route('departments.index') }}" class="{{ request()->is('departments*') ? 'active' : '' }}">Departments</a></li>
                 <li><a href="{{ route('positions.index') }}" class="{{ request()->is('positions*') ? 'active' : '' }}">Positions</a></li>
-                <li><a href="{{ route('attendances.index') }}" class="{{ request()->is('attendance*') ? 'active' : '' }}">Attendance</a></li>                
+                <li><a href="{{ route('attendances.index') }}" class="{{ request()->is('attendance*') ? 'active' : '' }}">Attendance</a></li>
+                <li><a href="{{ route('performance-reviews.index') }}" class="{{ request()->is('perfomance_reviews*') ? 'active' : '' }}">Reviews</a></li>                
             </ul>
         </nav>
     </header>

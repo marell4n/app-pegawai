@@ -163,6 +163,58 @@ button[type="submit"]:hover,
     padding-left: 5px;
 }
 
+/* ========== RADIO BUTTON GROUP STYLES ========== */
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px; /* Jarak antar tombol */
+}
+
+.radio-option {
+    position: relative;
+}
+
+/* Sembunyikan radio button asli */
+.radio-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Style untuk label agar terlihat seperti tombol */
+.radio-option label {
+    display: inline-block;
+    background-color: #fdfdfd;
+    border: 2px solid #EA9CAF;
+    color: #733D26;
+    padding: 10px 15px;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    min-width: 45px; /* Agar lebar tombol seragam untuk angka 1 digit */
+    margin-bottom: 0; /* Reset margin label default form */
+}
+
+/* Efek hover */
+.radio-option label:hover {
+    background-color: #F9D0DE;
+}
+
+/* Style saat radio button dipilih (checked) */
+.radio-option input[type="radio"]:checked + label {
+    background-color: #733D26;
+    color: white;
+    border-color: #733D26;
+    box-shadow: 0 4px 10px rgba(213, 105, 137, 0.3);
+    transform: translateY(-2px);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     body {

@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             EmployeeSeeder::class,
             AttendanceSeeder::class,
             SalarySeeder::class,
+            PerformanceReviewSeeder::class,
         ]);
     }
 }

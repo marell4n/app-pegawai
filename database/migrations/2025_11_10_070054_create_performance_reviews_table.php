@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('performance_reviews', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('karyawan_id');
-            $table->timestamps('tanggal_review')->useCurrent(); // Menggunakan timestamp untuk tanggal & waktu review, default ke waktu sekarang
+            $table->timestamp('tanggal_review')->useCurrent(); // Menggunakan timestamp untuk tanggal & waktu review, default ke waktu sekarang
             $table->decimal('skor', 4, 2); // Skor skala 0-10. Menggunakan (4, 2) cukup untuk angka hingga 10.00
             $table->text('catatan_feedback');
             $table->timestamps();
