@@ -31,6 +31,19 @@
     * Hanya absensi dengan status **A (Alpha)** dan **HT (Hadir Terlambat)** yang bisa diubah.
     * Menghapus data absensi.
 
+### Fitur & Tabel Baru
+1.  **Fitur Dashboard Interaktif**
+    * **Filter Periode:** Lihat data berdasarkan Bulan dan Tahun tertentu.
+    * **Kartu Ringkasan:** Total Kehadiran, Sakit, Izin, dan Alpha dalam satu periode.
+    * **Rekap Absensi:** Tabel grid yang menampilkan status kehadiran seluruh pegawai untuk setiap hari dalam satu bulan penuh (H=Hadir, S=Sakit, I=Izin, A=Alpha).
+2.  **Fitur Pencarian Data**
+    * Menampilkan data yang dicari.
+    * Filter tanggal pada *Attendance* untuk memudahkan melihat absensi per hari. 
+3.  **Performance Review**
+    * Input penilaian dengan skor skala 1-10.
+    * Catatan *feedback* detail untuk setiap sesi *review*.
+    * Riwayat penilaian yang terhubung langsung ke data karyawan.
+
 ### Struktur & Tampilan
 
 * Menggunakan layout master (`master.blade.php`) untuk tampilan yang konsisten di semua halaman (header, navigasi, footer).
