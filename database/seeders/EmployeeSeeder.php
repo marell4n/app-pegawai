@@ -2,74 +2,43 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB; // Gunakan DB facade
-use Carbon\Carbon; // Untuk timestamps
+use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class EmployeeSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        // Hapus data lama jika perlu (opsional)
-        // DB::table('employees')->truncate();
+        $faker = Faker::create('id_ID'); // Pakai locale Indonesia
 
-        DB::table('employees')->insert([
-            [
-                'nama_lengkap' => 'Ahmad Budi Santoso',
-                'email' => 'ahmad.budi@example.com',
-                'nomor_telepon' => '081234567890',
-                'tanggal_lahir' => '1990-05-15',
-                'alamat' => 'Jl. Merdeka No. 10, Jakarta',
-                'tanggal_masuk' => '2022-01-10',
-                'department_id' => 1, // ID untuk 'Teknologi Informasi' (sesuaikan jika berbeda)
-                'jabatan_id' => 1,    // ID untuk 'Software Engineer' (sesuaikan jika berbeda)
+        // Matikan foreign key check sementara untuk truncate
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('employees')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        $employees = [];
+        // Ambil ID yang valid dari departments dan positions
+        // Asumsi seeder Department & Position sudah dijalankan dan ID-nya 1-5 dan 1-4
+        $deptIds = [1, 2, 3, 4, 5];
+        $posIds = [1, 2, 3, 4]; 
+
+        for ($i = 1; $i <= 30; $i++) {
+            $employees[] = [
+                'nama_lengkap' => $faker->name,
+                'email' => $faker->unique()->safeEmail,
+                'nomor_telepon' => $faker->phoneNumber,
+                'tanggal_lahir' => $faker->date('Y-m-d', '-22 years'), // Umur min 22 thn
+                'alamat' => $faker->address,
+                'tanggal_masuk' => $faker->date('Y-m-d', '-1 years'), // Masuk dalam 1 tahun terakhir
+                'department_id' => $faker->randomElement($deptIds),
+                'jabatan_id' => $faker->randomElement($posIds),
                 'status' => 'aktif',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'nama_lengkap' => 'Citra Dewi Lestari',
-                'email' => 'citra.dewi@example.com',
-                'nomor_telepon' => '087654321098',
-                'tanggal_lahir' => '1992-08-22',
-                'alamat' => 'Jl. Pahlawan No. 5, Surabaya',
-                'tanggal_masuk' => '2021-03-20',
-                'department_id' => 2, // ID untuk 'Sumber Daya Manusia'
-                'jabatan_id' => 2,    // ID untuk 'HR Manager'
-                'status' => 'aktif',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'nama_lengkap' => 'Eko Prasetyo',
-                'email' => 'eko.prasetyo@example.com',
-                'nomor_telepon' => '085511223344',
-                'tanggal_lahir' => '1988-12-01',
-                'alamat' => 'Jl. Sudirman No. 15, Bandung',
-                'tanggal_masuk' => '2023-07-01',
-                'department_id' => 3, // ID untuk 'Keuangan'
-                'jabatan_id' => 3,    // ID untuk 'Accountant'
-                'status' => 'aktif',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-             [
-                'nama_lengkap' => 'Fiona Anggraini',
-                'email' => 'fiona.anggraini@example.com',
-                'nomor_telepon' => '081199887766',
-                'tanggal_lahir' => '1994-02-28',
-                'alamat' => 'Jl. Thamrin No. 20, Medan',
-                'tanggal_masuk' => '2022-11-05',
-                'department_id' => 4, // ID untuk 'Pemasaran'
-                'jabatan_id' => 4,    // ID untuk 'Marketing Specialist'
-                'status' => 'nonaktif', // Contoh status nonaktif
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-        ]);
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
+
+        DB::table('employees')->insert($employees);
     }
 }

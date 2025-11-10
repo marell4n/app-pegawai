@@ -18,12 +18,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            DepartmentSeeder::class, // Harus dijalankan dulu
-            PositionSeeder::class, // Harus dijalankan dulu
-            EmployeeSeeder::class,
-            AttendanceSeeder::class,
-            SalarySeeder::class,
-            PerformanceReviewSeeder::class,
+            DepartmentSeeder::class,      // 1. Master Data Departemen
+            PositionSeeder::class,        // 2. Master Data Jabatan
+            EmployeeSeeder::class,        // 3. Data Pegawai (butuh Dept & Pos)
+            AttendanceSeeder::class,      // 4. Data Absensi (butuh Pegawai)
+            PerformanceReviewSeeder::class, // 5. Data Review (butuh Pegawai)
+            SalarySeeder::class,          // 6. Data Gaji (jika ada, butuh Pegawai & Posisi)
         ]);
     }
 }
