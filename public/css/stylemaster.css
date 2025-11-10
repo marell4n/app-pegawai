@@ -1,0 +1,277 @@
+.noto-sans {
+    font-family: "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Noto Sans", sans-serif;
+    background: whitesmoke;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ========== NAVBAR STYLES (FIXED) ========== */
+header {
+    background: #F790B2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(213, 105, 137, 0.3);
+}
+
+.navbar-header {
+    padding: 15px 20px;
+    position: relative;
+    text-align: center;
+}
+.navbar-header h1 {
+    margin: 0;
+    line-height: 2; /* Pastikan tinggi baris teks rapat */
+}
+
+.navbar-header h1 a {
+    color: #733D26;
+    text-align: center;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+    margin: 0;
+}
+
+.navbar-header h1 a:hover {
+    opacity: 0.8; 
+}
+
+nav {
+    background: #F8B0C8;
+    backdrop-filter: blur(10px);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 18px 30px;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: white;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover {
+    background: #AF7F73;
+}
+
+nav ul li a:hover::after {
+    width: 60%;
+}
+
+nav ul li a.active {
+    background: #733D26;
+}
+
+nav ul li a.active::after {
+    width: 60%;
+}
+
+/* Hamburger Menu Button */
+.menu-toggle {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+    background: #733D26;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.menu-toggle:hover {
+    background: #4a2312;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 5px auto;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* ========== MAIN CONTENT WRAPPER ========== */
+main {
+    flex: 1;
+    padding: 40px;
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 130px; /* Tinggi navbar (header + nav) */
+    margin-bottom: 0;
+}
+
+/* ========== FOOTER ========== */
+footer {
+    color: #733D26;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+    width: 100%;
+}
+
+footer p {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    main {
+        padding: 30px 20px;
+        margin-top: 130px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .navbar-header {
+        padding: 15px 20px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navbar-header h1 {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    nav {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    nav.active {
+        max-height: 500px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    nav ul li {
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    nav ul li:last-child {
+        border-bottom: none;
+    }
+
+    nav ul li a {
+        padding: 15px 20px;
+    }
+
+    nav ul li a::after {
+        display: none;
+    }
+
+    main {
+        padding: 30px 20px;
+        margin-top: 80px;
+    }
+
+    footer {
+        padding: 15px;
+    }
+
+    footer p {
+        font-size: 12px;
+    }
+}
+
+/* Mobile Portrait */
+@media (max-width: 480px) {
+    .navbar-header h1 {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    nav ul li a {
+        font-size: 13px;
+        padding: 12px 15px;
+    }
+
+    main {
+        padding: 20px 15px;
+        margin-top: 70px;
+    }
+}

@@ -1,0 +1,204 @@
+.noto-sans {
+    font-family: "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Noto Sans", sans-serif;
+    background: #F3EEF1;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+h1 {
+    color: #F790B2;
+    text-align: center;
+    font-size: 2.5em;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.table-detail {
+    background: #733D26;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(213, 105, 137, 0.3);
+    overflow: hidden;
+    animation: slideUp 0.6s ease-out;
+}
+
+table {
+    width: 100%;
+    padding: 40px;
+    border-collapse: collapse;
+    border: none;
+}
+
+tr {
+    border-bottom: none;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 15px 10px;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background: rgba(213, 105, 137, 0.1);
+    color: whitesmoke;
+    font-weight: 400;
+    font-size: 14px;
+    width: 40%;
+    font-family: "Noto Sans", sans-serif;
+}
+
+td {
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: "Noto Sans", sans-serif;
+}
+
+tr:hover th {
+    background: rgba(213, 105, 137, 0.2);
+    color: #F790B2;
+    transition: all 0.3s ease;
+}
+
+tr:hover td {
+    background: rgba(255, 255, 255, 0.95);
+    transition: all 0.3s ease;
+}
+
+.status-aktif {
+    color: #28a745;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-nonaktif {
+    color: #dc3545;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+/* Animation */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Container untuk button yang sejajar dengan tabel */
+.button-container {
+    max-width: 600px;
+    margin: 20px auto 0;
+}
+
+.action-buttons {
+    text-align: right;
+    padding: 0;
+    background: transparent;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: "Noto Sans", sans-serif;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(213, 105, 137, 0.4);
+}
+
+.btn-back {
+    background: #EA9CAF;
+    color: black;
+}
+
+.btn-edit {
+    background: #AF7F73;
+    box-shadow: 0 2px 8px rgba(234, 156, 175, 0.3);
+    color: white;
+}
+
+.btn-delete {
+    background: #733D26;
+    box-shadow: 0 2px 8px rgba(194, 97, 108, 0.3);
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(213, 105, 137, 0.6);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+    
+    table {
+        padding: 20px;
+    }
+    
+    th, td {
+        padding: 12px 8px;
+        font-size: 13px;
+    }
+    
+    th {
+        width: 35%;
+    }
+
+    .button-container {
+        margin-top: 15px;
+    }
+
+    .action-buttons {
+        text-align: center;
+        padding: 0;
+    }
+
+    .btn {
+        padding: 12px 25px;
+        margin: 5px;
+        font-size: 14px;
+    }
+}
