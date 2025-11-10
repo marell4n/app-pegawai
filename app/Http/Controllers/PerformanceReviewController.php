@@ -1,0 +1,101 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\PerformanceReview;
+use App\Models\Employee;
+use Illuminate\Http\Request;
+
+class PerformanceReviewController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        // Mengambil semua data review dengan relasi employee, diurutkan dari yang terbaru
+        $reviews = PerformanceReview::with('employee')->latest('tanggal_review')->paginate(10);
+        return view('performance_reviews.index', compact('reviews'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $employees = Employee::orderBy('nama_lengkap')->where('status', 'aktif')->get();
+        return view('performance_reviews.create', compact('employees'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        // Validasi input sesuai aturan bisnis yang Anda minta
+        $request->validate([
+            'karyawan_id' => 'required|exists:employees,id',
+            'tanggal_review' => 'required|date', // Bisa input datetime-local di view nanti
+            'skor' => 'required|numeric|min:0|max:10',
+            'catatan_feedback' => 'required|string',
+        ]);
+
+        PerformanceReview::create($request->all());
+
+        return redirect()->route('performance-reviews.index')
+                         ->with('success', 'Performance review berhasil ditambahkan.');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $performanceReview = PerformanceReview::findOrFail($id);
+
+        return view('performance_reviews.show', compact('performanceReview'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $performanceReview = PerformanceReview::findOrFail($id);
+        $employees = Employee::orderBy('nama_lengkap')->where('status', 'aktif')->get();
+
+        return view('performance_reviews.edit', compact('performanceReview', 'employees'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $performanceReview = PerformanceReview::findOrFail($id);
+
+        $request->validate([
+            'karyawan_id' => 'required|exists:employees,id',
+            'tanggal_review' => 'required|date',
+            'skor' => 'required|numeric|min:0|max:10',
+            'catatan_feedback' => 'required|string',
+        ]);
+
+        $performanceReview->update($request->all());
+
+        return redirect()->route('performance-reviews.index')
+                         ->with('success', 'Performance review berhasil diperbarui.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        $performanceReview = PerformanceReview::findOrFail($id);
+        $performanceReview->delete();
+
+        return redirect()->route('performance-reviews.index')
+                         ->with('success', 'Performance review berhasil dihapus.');
+    }
+}
