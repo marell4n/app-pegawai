@@ -6,8 +6,9 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\PerformanceReviewController;
+use App\Http\Controllers\DashboardController;
 
-Route::get('/', [EmployeeController::class, 'index'])->name('home');
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('employees', EmployeeController::class);
 Route::resource('departments', DepartmentController::class);
