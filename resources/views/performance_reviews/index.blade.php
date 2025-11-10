@@ -20,6 +20,17 @@
     <div style="color: red; margin-bottom: 15px; text-align: center;">{{ session('error') }}</div>
 @endif
 
+<div class="search-container">
+    <form action="{{ route('performance-reviews.index') }}" method="GET" class="search-form">
+        <input type="text" name="search" placeholder="Cari nama pegawai..." value="{{ request('search') }}">
+        <button type="submit">Cari</button>
+        @if(request('search'))
+            {{-- Tombol reset jika sedang mencari --}}
+            <a href="{{ route('performance-reviews.index') }}" style="display: flex; align-items: center; color: #D56989; text-decoration: none; font-weight: bold; margin-left: 5px;">✕ Reset</a>
+        @endif
+    </form>
+</div>
+
 <div class="table-container">
     <table>
         <thead>

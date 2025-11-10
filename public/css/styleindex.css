@@ -195,6 +195,60 @@ tbody tr:hover td {
     background: rgba(213, 105, 137, 0.7);
 }
 
+/* ========== SEARCH BAR STYLES ========== */
+.search-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end; /* Agar search bar ada di kanan atas tabel */
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.search-form input[type="text"] {
+    flex: 1;
+    padding: 10px 15px;
+    border: 2px solid #EA9CAF;
+    border-radius: 50px; /* Membuat input bulat */
+    font-size: 14px;
+    font-family: "Noto Sans", sans-serif;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-form input[type="text"]:focus {
+    border-color: #D56989;
+    box-shadow: 0 0 8px rgba(213, 105, 137, 0.3);
+}
+
+.search-form button {
+    background: #D56989;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: "Noto Sans", sans-serif;
+}
+
+.search-form button:hover {
+    background: #bf5b78;
+    transform: translateY(-1px);
+}
+
+/* Responsif untuk mobile */
+@media (max-width: 768px) {
+    .search-container {
+        justify-content: center;
+    }
+}
+
 /* ========== RESPONSIVE DESIGN ========== */
 
 /* Tablet */

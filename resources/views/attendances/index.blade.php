@@ -14,6 +14,33 @@
     <div style="color: red; margin-bottom: 15px; text-align: center;">{{ session('error') }}</div>
 @endif
 
+{{-- === FILTER BAR === --}}
+<div class="search-container">
+    <form action="{{ route('attendances.index') }}" method="GET" class="search-form" style="max-width: 600px;"> 
+        {{-- Input 1: Cari Nama --}}
+        <input type="text" name="search_name" placeholder="Cari nama pegawai..." value="{{ request('search_name') }}" style="flex: 2;">
+        
+        {{-- Input 2: Dropdown Tanggal --}}
+        <select name="search_date" style="flex: 1; padding: 10px 15px; border: 2px solid #EA9CAF; border-radius: 50px; outline: none; cursor: pointer;">
+            <option value="">-- Semua Tanggal --</option>
+            @foreach($availableDates as $date)
+                <option value="{{ $date }}" {{ request('search_date') == $date ? 'selected' : '' }}>
+                    {{ \Carbon\Carbon::parse($date)->format('d M Y') }}
+                </option>
+            @endforeach
+        </select>
+
+        <button type="submit">Filter</button>
+        
+        {{-- Tombol Reset jika ada filter yang aktif --}}
+        @if(request('search_name') || request('search_date'))
+            <a href="{{ route('attendances.index') }}" style="display: flex; align-items: center; color: #D56989; text-decoration: none; font-weight: bold; margin-left: 10px;">
+                ✕ Reset
+            </a>
+        @endif
+    </form>
+</div>
+
 {{-- Logika untuk Mengelompokkan per Tanggal --}}
 @php
     $currentDate = null;

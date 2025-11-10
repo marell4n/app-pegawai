@@ -11,10 +11,21 @@ class PerformanceReviewController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Mengambil semua data review dengan relasi employee, diurutkan dari yang terbaru
-        $reviews = PerformanceReview::with('employee')->latest('tanggal_review')->paginate(10);
+        $search = $request->input('search');
+
+        $reviews = PerformanceReview::with('employee')
+            ->when($search, function ($query, $search) {
+                // Cari review berdasarkan nama karyawan terkait
+                $query->whereHas('employee', function($q) use($search) {
+                    $q->where('nama_lengkap', 'like', "%{$search}%");
+                });
+            })
+            ->latest('tanggal_review')
+            ->paginate(10)
+            ->appends(['search' => $search]);
+
         return view('performance_reviews.index', compact('reviews'));
     }
 

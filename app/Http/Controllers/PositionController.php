@@ -10,9 +10,17 @@ class PositionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $positions = Position::latest()->paginate(10);
+        $search = $request->input('search');
+
+        $positions = Position::when($search, function ($query, $search) {
+                $query->where('nama_jabatan', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->paginate(10)
+            ->appends(['search' => $search]);
+
         return view('positions.index', compact('positions'));
     }
 
