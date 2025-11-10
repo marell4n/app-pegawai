@@ -249,6 +249,41 @@ tbody tr:hover td {
     }
 }
 
+/* Pastikan grup filter sejajar rapi */
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Jarak antara label dan input */
+}
+
+/* Style untuk label Tanggal */
+.filter-label {
+    font-weight: 700;
+    color: #733D26; /* Warna coklat tema */
+    white-space: nowrap; /* Mencegah teks "Tanggal:" terpotong ke bawah */
+}
+
+/* Style khusus untuk input tanggal agar cantik seperti search bar */
+.date-input {
+    background-color: white;
+    border: 2px solid #EA9CAF; /* Border pink tema */
+    border-radius: 50px;       /* Membuat sudut bulat (pill shape) */
+    padding: 8px 15px;         /* Ruang di dalam input */
+    font-family: "Noto Sans", sans-serif;
+    font-size: 14px;
+    color: #555;
+    outline: none;             /* Hapus garis biru default browser saat diklik */
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Efek saat input tanggal diklik/aktif */
+.date-input:focus,
+.date-input:hover {
+    border-color: #D56989; /* Warna pink lebih gelap saat aktif */
+    box-shadow: 0 2px 8px rgba(213, 105, 137, 0.2); /* Efek bayangan halus */
+}
+
 /* ========== RESPONSIVE DESIGN ========== */
 
 /* Tablet */

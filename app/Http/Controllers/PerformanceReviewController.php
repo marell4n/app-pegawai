@@ -23,8 +23,7 @@ class PerformanceReviewController extends Controller
                 });
             })
             ->latest('tanggal_review')
-            ->paginate(10)
-            ->appends(['search' => $search]);
+            ->get();
 
         return view('performance_reviews.index', compact('reviews'));
     }

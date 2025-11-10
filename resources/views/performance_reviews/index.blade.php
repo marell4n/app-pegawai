@@ -46,7 +46,7 @@
         <tbody>
             @forelse($reviews as $review)
                 <tr>
-                    <td>{{ $loop->iteration + ($reviews->currentPage() - 1) * $reviews->perPage() }}</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td style="text-align: left;">{{ $review->employee->nama_lengkap ?? 'N/A' }}</td>
                     <td>{{ \Carbon\Carbon::parse($review->tanggal_review)->format('d-m-Y') }}</td>
                     <td><strong>{{ $review->skor }}</strong> / 10</td>
@@ -82,11 +82,6 @@
             @endforelse
         </tbody>
     </table>
-</div>
-
-{{-- Pagination Links jika diperlukan --}}
-<div style="margin-top: 20px; text-align: center;">
-    {{ $reviews->links() }}
 </div>
 
 <div class="button-container" style="margin-bottom: 20px;">

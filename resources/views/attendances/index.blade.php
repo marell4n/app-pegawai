@@ -21,14 +21,10 @@
         <input type="text" name="search_name" placeholder="Cari nama pegawai..." value="{{ request('search_name') }}" style="flex: 2;">
         
         {{-- Input 2: Dropdown Tanggal --}}
-        <select name="search_date" style="flex: 1; padding: 10px 15px; border: 2px solid #EA9CAF; border-radius: 50px; outline: none; cursor: pointer;">
-            <option value="">-- Semua Tanggal --</option>
-            @foreach($availableDates as $date)
-                <option value="{{ $date }}" {{ request('search_date') == $date ? 'selected' : '' }}>
-                    {{ \Carbon\Carbon::parse($date)->format('d M Y') }}
-                </option>
-            @endforeach
-        </select>
+        <div class="filter-group">
+            <label for="search_date" class="filter-label">Tanggal:</label>
+            <input type="date" name="search_date" id="search_date" class="filter-input date-input" value="{{ request('search_date') }}">
+        </div>
 
         <button type="submit">Filter</button>
         

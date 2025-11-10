@@ -18,8 +18,7 @@ class PositionController extends Controller
                 $query->where('nama_jabatan', 'like', "%{$search}%");
             })
             ->latest()
-            ->paginate(10)
-            ->appends(['search' => $search]);
+            ->get();
 
         return view('positions.index', compact('positions'));
     }

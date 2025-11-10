@@ -16,31 +16,21 @@ class AttendanceController extends Controller
      */
     public function index(Request $request)
     {
-       // 1. Ambil daftar tanggal unik untuk dropdown, urutkan dari terbaru
-        $availableDates = Attendance::select('tanggal')
-            ->distinct()
-            ->orderBy('tanggal', 'desc')
-            ->pluck('tanggal');
-
-        // 2. Query utama dengan filter dinamis
-        $attendances = Attendance::with('employee')
-            // Filter berdasarkan Nama Karyawan jika ada input 'search_name'
+       $attendances = Attendance::with('employee')
             ->when($request->search_name, function ($query, $name) {
                 $query->whereHas('employee', function($q) use($name) {
                     $q->where('nama_lengkap', 'like', "%{$name}%");
                 });
             })
-            // Filter berdasarkan Tanggal jika ada pilihan 'search_date'
+            // Filter ini tetap sama, akan otomatis jalan jika ada input tanggal
             ->when($request->search_date, function ($query, $date) {
                 $query->where('tanggal', $date);
             })
             ->orderBy('tanggal', 'desc')
             ->orderBy('karyawan_id')
-            ->paginate(20)
-            // Penting: appends() agar filter tetap ada saat pindah halaman pagination
-            ->appends($request->all());
+            ->get();
 
-        return view('attendances.index', compact('attendances', 'availableDates'));
+        return view('attendances.index', compact('attendances'));
     }
 
     /**

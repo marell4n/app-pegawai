@@ -18,8 +18,7 @@ class DepartmentController extends Controller
                 $query->where('nama_department', 'like', "%{$search}%");
             })
             ->latest()
-            ->paginate(10)
-            ->appends(['search' => $search]);
+            ->get();
 
         return view('departments.index', compact('departments'));
     }

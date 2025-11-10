@@ -29,8 +29,7 @@ class EmployeeController extends Controller
                       });
             })
             ->latest()
-            ->paginate(10)
-            ->appends(['search' => $search]);
+            ->get();
 
         return view('employees.index', compact('employees'));
     }

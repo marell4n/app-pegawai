@@ -36,12 +36,18 @@ header {
     position: relative;
 }
 
-.navbar-header h1 {
+.navbar-header h1 a {
     color: #733D26;
     text-align: center;
     font-weight: 800;
     text-transform: uppercase;
     margin: 10px;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.navbar-header h1 a:hover {
+    opacity: 0.8; 
 }
 
 nav {

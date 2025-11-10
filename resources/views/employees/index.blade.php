@@ -64,6 +64,7 @@
                     </td>
                 </tr>
             @empty
+                <td colspan="6" style="text-align: center; padding: 20px;">Tidak ada data pegawai ditemukan.</td>
             @endforelse
         </tbody>
     </table>
