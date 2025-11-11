@@ -1,11 +1,9 @@
 @extends('master')
 @section('title', 'Input Pegawai Baru')
 @section('content')
-
-{{-- Link CSS ditempatkan di sini agar konsisten --}}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="{{ asset('css/styleform.css') }}">
 
-{{-- Judul H1 dibuat konsisten --}}
 <h1>Form Tambah Pegawai</h1>
 
 @if ($errors->any())

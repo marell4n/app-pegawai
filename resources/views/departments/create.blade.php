@@ -1,6 +1,7 @@
 @extends('master')
 @section('title', 'Tambah Departemen Baru')
 @section('content')
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="{{ asset('css/styleform.css') }}">
 
 <h1>Form Tambah Departemen</h1>
